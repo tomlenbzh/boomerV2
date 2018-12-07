@@ -1,5 +1,5 @@
 // import React from "react";
-import { createStackNavigator } from "react-navigation";
+import { createAppContainer ,createStackNavigator } from "react-navigation";
 // import { StyleSheet, Text, View } from "react-native";
 
 import { Home } from "./src/containers/home";
@@ -19,7 +19,7 @@ import { Ranking } from "./src/containers/ranking";
 //   }
 // });
 
-const App = createStackNavigator({
+const AppStackNavigator = createStackNavigator({
   Home: { screen: Home },
   Login: { screen: Login },
   Register: { screen: Register },
@@ -35,4 +35,5 @@ const App = createStackNavigator({
 //   </View>
 // );
 
+const App = createAppContainer(AppStackNavigator);
 export default App;

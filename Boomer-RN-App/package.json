@@ -15,10 +15,11 @@
     "react-navigation": "^3.0.6"
   },
   "devDependencies": {
+    "@babel/preset-flow": "^7.0.0",
     "acorn": "^6.0.4",
     "babel-cli": "^6.26.0",
     "babel-preset-expo": "^5.0.0",
-    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react-native": "^4.0.1",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
