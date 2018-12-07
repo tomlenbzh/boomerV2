@@ -1,5 +1,5 @@
 // import React from "react";
-import { createAppContainer ,createStackNavigator } from "react-navigation";
+import { createAppContainer, createStackNavigator } from "react-navigation";
 // import { StyleSheet, Text, View } from "react-native";
 
 import { Home } from "./src/containers/home";
