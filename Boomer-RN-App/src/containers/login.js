@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-export class Home extends Component {
+export class Login extends Component {
   static propTypes = {
     prop: PropTypes
   };
 
-  static navigationOptions = {
-    title: 'Welcome'
-  };
-
   render() {
-    const { navigate } = this.props.navigation;
     return (
-      <Button
-        title="Go to Jane's profile"
-        onPress={() => navigate('Profile', { name: 'Jane' })}
-      />
+      <View>
+        <Text> prop </Text>
+      </View>
     );
   }
 }
@@ -30,4 +24,4 @@ const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(Login);
