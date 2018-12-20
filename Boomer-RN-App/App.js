@@ -19,15 +19,20 @@ import { Ranking } from "./src/containers/ranking";
 //   }
 // });
 
-const AppStackNavigator = createStackNavigator({
-  Home: { screen: Home },
-  Login: { screen: Login },
-  Register: { screen: Register },
-  Profile: { screen: Profile },
-  Room: { screen: Room },
-  Generator: { screen: Generator },
-  Ranking: { screen: Ranking }
-});
+const AppStackNavigator = createStackNavigator(
+  {
+    Home: { screen: Home },
+    Login: { screen: Login },
+    Register: { screen: Register },
+    Profile: { screen: Profile },
+    Room: { screen: Room },
+    Generator: { screen: Generator },
+    Ranking: { screen: Ranking }
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 // const App = () => (
 //   <View style={styles.container}>

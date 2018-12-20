@@ -2,7 +2,8 @@
   "plugins": ["prettier"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "linebreak-style": ["error", "windows"]
   },
   "extends": ["airbnb", "prettier"]
 }
