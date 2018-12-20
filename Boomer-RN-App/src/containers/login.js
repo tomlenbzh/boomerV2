@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   },
   loginTextButton: {
     width: '100%',
-    textAlign: 'center'
   }
 });
 
