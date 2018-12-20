@@ -22,15 +22,19 @@ import {
   Text
 } from 'native-base';
 // import { connect } from 'react-redux';
+import { Dimensions } from 'react-native'
+
+const ScreenHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   headerTitle: {
     textAlign: 'center' /* Pas appliqué ! WTF ? */
   },
   loginContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'red' /* Taille du container ? Full Size ! */
+    height : ScreenHeight,
+    // flex: 1,
+    // flexDirection: 'column',
+    backgroundColor: 'blue' /* Taille du container ? Full Size ! */
   },
   loginTitle: {
     textAlign: 'center',
@@ -44,8 +48,9 @@ const styles = StyleSheet.create({
   },
   loginForm: {
     width: '90%',
-    height: 250,
+    // height: 250,
     marginTop: '10%',
+    paddingBottom: '10%',
     marginLeft: '5%',
     marginRight: '5%',
     backgroundColor: '#16202c',
@@ -58,7 +63,8 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
   },
   loginTextButton: {
-    textAlign: 'center' /* Pas appliqué ! WTF ? */
+    width: '100%',
+    textAlign: 'center'
   }
 });
 
