@@ -57,11 +57,11 @@ export class Home extends Component {
           <Body>
             <Title>Boomer</Title>
           </Body>
-          <Button transparent onPress={() => navigate('Login')}>
+          <Button transparent onPress={() => navigate('Profile')}>
             <Icon name="menu" />
           </Button>
         </Header>
-        <Content>
+        <Content padder>
           <Text>Welcome on the home page</Text>
         </Content>
         <Footer>

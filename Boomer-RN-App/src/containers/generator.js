@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 
-export class Generator extends Component {
+export class RoomGenerator extends Component {
   static propTypes = {
     prop: PropTypes
   };
@@ -21,4 +21,4 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {};
 
-export default Generator;
+export default RoomGenerator;
