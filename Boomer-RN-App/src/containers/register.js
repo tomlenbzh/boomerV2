@@ -24,6 +24,7 @@ import {
 } from 'native-base';
 // import { connect } from 'react-redux';
 import { Dimensions } from 'react-native';
+import RegisterComponent from '../components/register';
 
 const ScreenHeight = Dimensions.get('window').height;
 // import { connect } from 'react-redux';
@@ -91,8 +92,33 @@ const styles = StyleSheet.create({
 
 export class Register extends Component {
   static propTypes = {
-    // prop: PropTypes
+    // prop: PropTypes  
   };
+
+  constructor(props) {
+    super(props);
+    this.navigateTo = this.navigateTo.bind(this);
+    this.state = {
+      pseudo: '',
+      password: '',
+      password_confirmation: ''
+    };
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.signUp(this.state);
+  };
+
+  navigateTo(path) {
+    this.props.navigation.navigate(path);
+  }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -103,28 +129,7 @@ export class Register extends Component {
             <View style={styles.headerTitle}>
               <Text style={styles.headerTitleText}>Boomer</Text>
             </View>
-            <Form style={styles.registerForm}>
-              <Text style={styles.registerTitle}>Register</Text>
-              <Item floatingLabel style={styles.registerInput}>
-                <Label style={styles.registerLabel}>Username</Label>
-                <Input />
-              </Item>
-              <Item floatingLabel style={styles.registerInput}>
-                <Label style={styles.registerLabel}>Password</Label>
-                <Input />
-              </Item>
-              <Item floatingLabel style={styles.registerInput}>
-                <Label style={styles.registerLabel}>Confirm password</Label>
-                <Input />
-              </Item>
-              <Button
-                rounded
-                style={styles.registerButton}
-                onPress={() => navigate('Home')}
-              >
-                <Text style={styles.registerButtonText}>Register</Text>
-              </Button>
-            </Form>
+            <RegisterComponent navigate={this.navigateTo} text="Un beau text"/>
           </View>
         </Content>
         <Footer>
@@ -146,8 +151,24 @@ export class Register extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => {
+  state.auth.authError = null;
+  return {
+    registerError: state.auth.registerError,
+    hasRegistered: state.auth.hasRegistered,
+    auth: state.auth.userData
+  };
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: credentials => dispatch(signUp(credentials))
+  };
+};
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Register);
 
 export default Register;
