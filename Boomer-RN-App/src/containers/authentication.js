@@ -9,7 +9,10 @@ import {
   Button,
   Text
 } from 'native-base';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { signIn } from '../store/actions/authenticationActions';
+import { signUp } from '../store/actions/authenticationActions';
+
 import { Dimensions } from 'react-native';
 import LoginComponent from '../components/login';
 import RegisterComponent from '../components/register';
@@ -91,8 +94,10 @@ export class Authentication extends Component {
     this.navigateTo = this.navigateTo.bind(this);
     this.state = {
       loading: true,
-      pseudo: '',
-      password: '',
+      pseudoLogin: '',
+      passwordLogin: '',
+      pseudoRegister: '',
+      passwordRegister: '',
       currentComponent: '/Login'
     };
   }
@@ -106,15 +111,26 @@ export class Authentication extends Component {
     }
   }
 
-  handleChange = e => {
+  handleChangeSignUp = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
 
-  handleSubmit = e => {
+  handleChangeSignIn = e => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  };
+
+  handleSubmitSignUp = e => {
     e.preventDefault();
     //this.props.signUp(this.state);
+  };
+
+  handleSubmitSignIn = e => {
+    e.preventDefault();
+    //this.props.signIp(this.state);
   };
 
   navigateTo(path) {
@@ -144,9 +160,19 @@ export class Authentication extends Component {
               <Text style={styles.headerTitleText}>Boomer</Text>
             </View>
             {this.state.currentComponent === '/Login' ? (
-              <LoginComponent navigate={this.navigateTo} text="Login" />
+              <LoginComponent
+                navigate={this.navigateTo}
+                hSubmit={this.handleSubmitSignIn}
+                hChange={this.handleChangeSignIn}
+                text="Login"
+              />
             ) : (
-              <RegisterComponent navigate={this.navigateTo} text="Register" />
+              <RegisterComponent
+                navigate={this.navigateTo}
+                hSubmit={this.handleSubmitSignUp}
+                hChange={this.handleChangeSignUp}
+                text="Register"
+              />
             )}
           </View>
         </Content>
@@ -173,4 +199,19 @@ export class Authentication extends Component {
   }
 }
 
-export default Authentication;
+const mapStateToProps = state => {
+  state.auth.registerError = null;
+  return {
+    authError: state.auth.authError,
+    auth: state.auth.userData
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: credentials => dispatch(signIn(credentials)),
+    signUp: credentials => dispatch(signIn(credentials))
+  };
+};
+
+export default Authentication(mapStateToProps, mapDispatchToProps)(Login);
