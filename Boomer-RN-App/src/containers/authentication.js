@@ -210,8 +210,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     signIn: credentials => dispatch(signIn(credentials)),
-    signUp: credentials => dispatch(signIn(credentials))
+    signUp: credentials => dispatch(signUp(credentials))
   };
 };
 
-export default Authentication(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Authentication);

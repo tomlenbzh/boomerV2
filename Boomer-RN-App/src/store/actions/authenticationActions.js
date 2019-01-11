@@ -1,9 +1,9 @@
 import axios from "axios";
-import { API_URL } from "../../environment";
+// import { API_URL } from "../../environment";
 
 export const signIn = credentials => (dispatch, getState) =>
   axios
-    .post(`${API_URL}/auths/login`, credentials, {
+    .post(`/auths/login`, credentials, {
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
@@ -18,7 +18,7 @@ export const signIn = credentials => (dispatch, getState) =>
 
 export const signUp = credentials => (dispatch, getState) =>
   axios
-    .post(`${API_URL}/auths/signup`, credentials, {
+    .post(`/auths/signup`, credentials, {
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
@@ -33,7 +33,7 @@ export const signUp = credentials => (dispatch, getState) =>
 
 export const signOut = () => (dispatch, getState) =>
   axios
-    .get(`${API_URL}/auths/logout`)
+    .get(`/auths/logout`)
     .then(response => {
       dispatch({ type: "SIGN_OUT_SUCCESS", response });
     })
