@@ -4,6 +4,7 @@ import { Item, Label, Input, Button, Form, Text } from "native-base";
 import PropTypes from "prop-types";
 
 const ScreenHeight = Dimensions.get("window").height;
+
 const styles = StyleSheet.create({
   headerTitle: {
     marginTop: "10%"
@@ -13,24 +14,27 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "#FFF"
   },
-  registerContainer: {
+  loginContainer: {
     height: ScreenHeight,
     backgroundColor: "#286baf"
   },
-  registerTitle: {
+  loginTitle: {
     textAlign: "center",
     fontSize: 25,
     marginTop: "5%",
     color: "#FFFFFF"
   },
-  registerInput: {
+  loginInput: {
     width: "90%",
     marginRight: "10%"
   },
-  registerLabel: {
+  loginInputText: {
+    color: "white"
+  },
+  loginLabel: {
     color: "#ed9019"
   },
-  registerForm: {
+  loginForm: {
     width: "90%",
     marginTop: "5%",
     paddingBottom: "10%",
@@ -42,7 +46,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ed9019"
   },
-  registerButton: {
+  loginButton: {
     width: "90%",
     marginTop: "10%",
     marginLeft: "5%",
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8
   },
-  registerButtonText: {
+  loginButtonText: {
     width: "100%",
     textAlign: "center"
   },
@@ -65,37 +69,32 @@ const styles = StyleSheet.create({
   }
 });
 
-const RegisterComponent = props => {
+const LoginComponent = props => {
   const { navigate } = props;
-  console.log(props);
   return (
-    <Form style={styles.registerForm}>
-      <Text style={styles.registerTitle}>Register</Text>
-      <Item floatingLabel style={styles.registerInput}>
-        <Label style={styles.registerLabel}>Username</Label>
-        <Input />
+    <Form style={styles.loginForm}>
+      <Text style={styles.loginTitle}>Login</Text>
+      <Item floatingLabel style={styles.loginInput}>
+        <Label style={styles.loginLabel}>Username</Label>
+        <Input style={styles.loginInputText} />
       </Item>
-      <Item floatingLabel style={styles.registerInput}>
-        <Label style={styles.registerLabel}>Password</Label>
-        <Input />
-      </Item>
-      <Item floatingLabel style={styles.registerInput}>
-        <Label style={styles.registerLabel}>Confirm password</Label>
-        <Input />
+      <Item floatingLabel style={styles.loginInput}>
+        <Label style={styles.loginLabel}>Password</Label>
+        <Input style={styles.loginInputText} />
       </Item>
       <Button
         rounded
-        style={styles.registerButton}
+        style={styles.loginButton}
         onPress={() => navigate("Home")}
       >
-        <Text style={styles.registerButtonText}>Login</Text>
+        <Text style={styles.loginButtonText}>Login</Text>
       </Button>
     </Form>
   );
 };
 
-RegisterComponent.propTypes = {
+LoginComponent.propTypes = {
   navigate: PropTypes.func.isRequired
 };
 
-export default RegisterComponent;
+export default LoginComponent;

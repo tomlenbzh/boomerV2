@@ -1,6 +1,5 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
-import { Login } from "./src/containers/login";
-import { Register } from "./src/containers/register";
+import { Authentication } from "./src/containers/authentication";
 import { Home } from "./src/containers/home";
 import { Profile } from "./src/containers/profile";
 import { Room } from "./src/containers/room";
@@ -9,17 +8,14 @@ import { Ranking } from "./src/containers/ranking";
 
 const AppStackNavigator = createStackNavigator(
   {
-    Login: { screen: Login },
-    Register: { screen: Register },
+    Authentication: { screen: Authentication },
     Home: { screen: Home },
     Profile: { screen: Profile },
     Room: { screen: Room },
     Generator: { screen: RoomGenerator },
     Ranking: { screen: Ranking }
   },
-  {
-    headerMode: "none"
-  }
+  { headerMode: "none" }
 );
 
 const App = createAppContainer(AppStackNavigator);

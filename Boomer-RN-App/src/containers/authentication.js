@@ -3,31 +3,18 @@ import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Container,
-  Header,
-  Title,
-  Card,
-  CardItem,
-  Item,
-  Image,
-  Label,
-  Input,
   Content,
   Footer,
   FooterTab,
   Button,
-  Left,
-  Form,
-  Right,
-  Body,
-  Icon,
   Text
 } from 'native-base';
 // import { connect } from 'react-redux';
 import { Dimensions } from 'react-native';
+import LoginComponent from '../components/login';
 import RegisterComponent from '../components/register';
 
 const ScreenHeight = Dimensions.get('window').height;
-// import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   headerTitle: {
@@ -38,24 +25,27 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: '#FFF'
   },
-  registerContainer: {
+  loginContainer: {
     height: ScreenHeight,
     backgroundColor: '#286baf'
   },
-  registerTitle: {
+  loginTitle: {
     textAlign: 'center',
     fontSize: 25,
     marginTop: '5%',
     color: '#FFFFFF'
   },
-  registerInput: {
+  loginInput: {
     width: '90%',
     marginRight: '10%'
   },
-  registerLabel: {
+  loginInputText: {
+    color: 'white'
+  },
+  loginLabel: {
     color: '#ed9019'
   },
-  registerForm: {
+  loginForm: {
     width: '90%',
     marginTop: '5%',
     paddingBottom: '10%',
@@ -67,7 +57,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ed9019'
   },
-  registerButton: {
+  loginButton: {
     width: '90%',
     marginTop: '10%',
     marginLeft: '5%',
@@ -78,7 +68,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8
   },
-  registerButtonText: {
+  loginButtonText: {
     width: '100%',
     textAlign: 'center'
   },
@@ -90,19 +80,30 @@ const styles = StyleSheet.create({
   }
 });
 
-export class Register extends Component {
-  static propTypes = {
-    // prop: PropTypes  
-  };
+export class Authentication extends Component {
+  // static propTypes = {
+  //   prop: PropTypes
+  // };
 
   constructor(props) {
     super(props);
+    this.renderComponent = this.renderComponent.bind(this);
     this.navigateTo = this.navigateTo.bind(this);
     this.state = {
+      loading: true,
       pseudo: '',
       password: '',
-      password_confirmation: ''
+      currentComponent: '/Login'
     };
+  }
+
+  renderComponent(toRender) {
+    console.log('component to render : ', toRender);
+    if (toRender === '/Login') {
+      this.setState(previousState => ({ currentComponent: '/Login' }));
+    } else {
+      this.setState(previousState => ({ currentComponent: '/Register' }));
+    }
   }
 
   handleChange = e => {
@@ -113,34 +114,55 @@ export class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.signUp(this.state);
+    //this.props.signUp(this.state);
   };
 
   navigateTo(path) {
+    console.log('navigate to : ' + path);
     this.props.navigation.navigate(path);
+  }
+
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf')
+    });
+    this.setState({ loading: false });
   }
 
   render() {
     const { navigate } = this.props.navigation;
+    if (this.state.loading) {
+      return <Expo.AppLoading />;
+    }
     return (
       <Container>
         <Content>
-          <View style={styles.registerContainer}>
+          <View style={styles.loginContainer}>
             <View style={styles.headerTitle}>
               <Text style={styles.headerTitleText}>Boomer</Text>
             </View>
-            <RegisterComponent navigate={this.navigateTo} text="Un beau text"/>
+            {this.state.currentComponent === '/Login' ? (
+              <LoginComponent navigate={this.navigateTo} text="Login" />
+            ) : (
+              <RegisterComponent navigate={this.navigateTo} text="Register" />
+            )}
           </View>
         </Content>
         <Footer>
           <FooterTab style={styles.footer}>
-            <Button onPress={() => navigate('Login')}>
+            <Button
+              onPress={() => {
+                this.renderComponent('/Login');
+              }}
+            >
               <Text>Login</Text>
             </Button>
             <Button
-              active
-              style={styles.footerTabActive}
-              onPress={() => navigate('Register')}
+              onPress={() => {
+                this.renderComponent('/Register');
+              }}
             >
               <Text>Register</Text>
             </Button>
@@ -151,24 +173,4 @@ export class Register extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  state.auth.authError = null;
-  return {
-    registerError: state.auth.registerError,
-    hasRegistered: state.auth.hasRegistered,
-    auth: state.auth.userData
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    signUp: credentials => dispatch(signUp(credentials))
-  };
-};
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Register);
-
-export default Register;
+export default Authentication;
