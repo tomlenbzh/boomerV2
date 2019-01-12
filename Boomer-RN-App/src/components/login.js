@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
     marginRight: "5%",
     padding: "5%",
-    backgroundColor: "#0e2f50",
+    backgroundColor: "#16202c",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#ed9019"
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: "10%",
     marginLeft: "5%",
-    backgroundColor: "#1d344e",
+    backgroundColor: "#16202c",
     borderWidth: 1,
     borderColor: "#ed9019",
     shadowColor: "#000",

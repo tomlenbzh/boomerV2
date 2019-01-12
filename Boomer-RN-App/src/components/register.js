@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
     marginRight: "5%",
     padding: "5%",
-    backgroundColor: "#0e2f50",
+    backgroundColor: "#16202c",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#ed9019"
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: "10%",
     marginLeft: "5%",
-    backgroundColor: "#1d344e",
+    backgroundColor: "#16202c",
     borderWidth: 1,
     borderColor: "#ed9019",
     shadowColor: "#000",
@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#0e2f50"
   },
   footerTabActive: {
-    backgroundColor: "#0e2f50"
+    backgroundColor: "#000"
   }
 });
 
 const RegisterComponent = props => {
   const { navigate } = props;
-  console.log(props);
+  // console.log(props);
   return (
     <Form style={styles.registerForm}>
       <Text style={styles.registerTitle}>Register</Text>
@@ -86,7 +86,7 @@ const RegisterComponent = props => {
       <Button
         rounded
         style={styles.registerButton}
-        onPress={() => navigate("Home")}
+        onPress={() => props.hSubmit()}
       >
         <Text style={styles.registerButtonText}>Login</Text>
       </Button>
@@ -95,7 +95,8 @@ const RegisterComponent = props => {
 };
 
 RegisterComponent.propTypes = {
-  navigate: PropTypes.func.isRequired
+  navigate: PropTypes.func.isRequired,
+  hSubmit: PropTypes.func.isRequired
 };
 
 export default RegisterComponent;

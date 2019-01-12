@@ -3,22 +3,24 @@ import axios from "axios";
 
 export const signIn = credentials => (dispatch, getState) =>
   axios
-    .post(`/auths/login`, credentials, {
+    .post(`https://alexandremartins.net/auths/login`, credentials, {
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
     .then(response => {
+      console.log(response);
       dispatch({ type: "SIGN_IN_SUCCESS", response });
     })
     .catch(error => {
+      console.log(error);
       dispatch({ type: "SIGN_IN_ERROR", error });
       throw error;
     });
 
 export const signUp = credentials => (dispatch, getState) =>
   axios
-    .post(`/auths/signup`, credentials, {
+    .post(`https://alexandremartins.net/auths/signup`, credentials, {
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }

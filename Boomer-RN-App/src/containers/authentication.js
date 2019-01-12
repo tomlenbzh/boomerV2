@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   Container,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   loginContainer: {
     height: ScreenHeight,
-    backgroundColor: '#286baf'
+    // backgroundColor: '#286baf'
   },
   loginTitle: {
     textAlign: 'center',
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   footer: {
-    backgroundColor: '#0e2f50'
+    backgroundColor: '#16202c',
+    color: '#ed9019'
   },
   footerTabActive: {
     backgroundColor: '#0e2f50'
@@ -109,7 +110,7 @@ export class Authentication extends Component {
     } else {
       this.setState(previousState => ({ currentComponent: '/Register' }));
     }
-  }
+  };
 
   handleChangeSignUp = e => {
     this.setState({
@@ -124,7 +125,12 @@ export class Authentication extends Component {
   };
 
   handleSubmitSignUp = e => {
-    e.preventDefault();
+    // e.preventDefault();
+    const data = {
+      pseudo: 'test',
+      password: '@test'
+    }
+    signIn(data)
     //this.props.signUp(this.state);
   };
 
@@ -155,6 +161,8 @@ export class Authentication extends Component {
     return (
       <Container>
         <Content>
+        <ImageBackground source={require("../../assets/boomer-background.jpg")} style={{width: '100%', height: '100%'}}>
+        
           <View style={styles.loginContainer}>
             <View style={styles.headerTitle}>
               <Text style={styles.headerTitleText}>Boomer</Text>
@@ -175,6 +183,7 @@ export class Authentication extends Component {
               />
             )}
           </View>
+          </ImageBackground>
         </Content>
         <Footer>
           <FooterTab style={styles.footer}>
@@ -183,14 +192,14 @@ export class Authentication extends Component {
                 this.renderComponent('/Login');
               }}
             >
-              <Text>Login</Text>
+              <Text style={styles.footer}>Login</Text>
             </Button>
             <Button
               onPress={() => {
                 this.renderComponent('/Register');
               }}
             >
-              <Text>Register</Text>
+              <Text style={styles.footer}>Register</Text>
             </Button>
           </FooterTab>
         </Footer>
