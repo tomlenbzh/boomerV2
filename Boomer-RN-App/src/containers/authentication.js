@@ -93,6 +93,7 @@ export class Authentication extends Component {
     super(props);
     this.renderComponent = this.renderComponent.bind(this);
     this.navigateTo = this.navigateTo.bind(this);
+    this.handleChangeSignIn = this.handleChangeSignIn.bind(this);
     this.state = {
       loading: true,
       pseudoLogin: '',
@@ -113,15 +114,21 @@ export class Authentication extends Component {
   };
 
   handleChangeSignUp = e => {
+    e.preventDefault();
     this.setState({
       [e.target.id]: e.target.value
     });
   };
 
-  handleChangeSignIn = e => {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
+  handleChangeSignIn = (e) => {
+    console.log(e);
+    // console.log(text + " " + id);
+    // e.preventDefault();
+    // this.setState({
+    //   [e.target.id]: e.target.value
+    // });
+    this.setState(previousState => ({ pseudoLogin: e }));
+    console.log(this.state.pseudoLogin);
   };
 
   handleSubmitSignUp = e => {
@@ -175,13 +182,13 @@ export class Authentication extends Component {
                 text="Login"
               />
             ) : (
-              <RegisterComponent
-                navigate={this.navigateTo}
-                hSubmit={this.handleSubmitSignUp}
-                hChange={this.handleChangeSignUp}
-                text="Register"
-              />
-            )}
+                <RegisterComponent
+                  navigate={this.navigateTo}
+                  hSubmit={this.handleSubmitSignUp}
+                  hChange={this.handleChangeSignUp}
+                  text="Register"
+                />
+              )}
           </View>
           </ImageBackground>
         </Content>

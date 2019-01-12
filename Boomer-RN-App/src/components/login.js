@@ -70,17 +70,25 @@ const styles = StyleSheet.create({
 });
 
 const LoginComponent = props => {
-  const { navigate } = props;
+  const { navigate, hChange } = props;
   return (
     <Form style={styles.loginForm}>
       <Text style={styles.loginTitle}>Login</Text>
       <Item floatingLabel style={styles.loginInput}>
         <Label style={styles.loginLabel}>Username</Label>
-        <Input style={styles.loginInputText} />
+        <Input
+          style={styles.loginInputText}
+          id="pseudoLogin"
+          onChangeText={hChange}
+        />
       </Item>
       <Item floatingLabel style={styles.loginInput}>
         <Label style={styles.loginLabel}>Password</Label>
-        <Input style={styles.loginInputText} />
+        <Input
+          style={styles.loginInputText}
+          id="passwordLogin"
+          onChangeText={hChange}
+        />
       </Item>
       <Button
         rounded
@@ -94,7 +102,8 @@ const LoginComponent = props => {
 };
 
 LoginComponent.propTypes = {
-  navigate: PropTypes.func.isRequired
+  navigate: PropTypes.func.isRequired,
+  hChange: PropTypes.func.isRequired
 };
 
 export default LoginComponent;
