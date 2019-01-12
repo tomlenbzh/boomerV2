@@ -1,4 +1,7 @@
+import React from "react";
 import { createAppContainer, createStackNavigator } from "react-navigation";
+import { Provider } from "react-redux";
+import { store } from "./src/store/store";
 import { Authentication } from "./src/containers/authentication";
 import { Home } from "./src/containers/home";
 import { Profile } from "./src/containers/profile";
@@ -19,4 +22,13 @@ const AppStackNavigator = createStackNavigator(
 );
 
 const App = createAppContainer(AppStackNavigator);
-export default App;
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+  }
+}
