@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     color: "#FFFFFF"
   },
+  loginInputText: {
+    color: "white"
+  },  
   registerInput: {
     width: "90%",
     marginRight: "10%"
@@ -66,22 +69,37 @@ const styles = StyleSheet.create({
 });
 
 const RegisterComponent = props => {
-  const { navigate } = props;
+  const { navigate, hChange } = props;
   // console.log(props);
   return (
     <Form style={styles.registerForm}>
       <Text style={styles.registerTitle}>Register</Text>
       <Item floatingLabel style={styles.registerInput}>
         <Label style={styles.registerLabel}>Username</Label>
-        <Input />
+        <Input
+          style={styles.loginInputText}
+          onChangeText={text => {
+            hChange(text, "pseudoRegister");
+          }}
+        />
       </Item>
       <Item floatingLabel style={styles.registerInput}>
         <Label style={styles.registerLabel}>Password</Label>
-        <Input />
+        <Input
+          style={styles.loginInputText}
+          onChangeText={text => {
+            hChange(text, "passwordRegister");
+          }}
+        />
       </Item>
       <Item floatingLabel style={styles.registerInput}>
         <Label style={styles.registerLabel}>Confirm password</Label>
-        <Input />
+        <Input
+          style={styles.loginInputText}
+          onChangeText={text => {
+            hChange(text, "confirmpasswordRegister");
+          }}
+        />
       </Item>
       <Button
         rounded
@@ -96,7 +114,8 @@ const RegisterComponent = props => {
 
 RegisterComponent.propTypes = {
   navigate: PropTypes.func.isRequired,
-  hSubmit: PropTypes.func.isRequired
+  hSubmit: PropTypes.func.isRequired,
+  hChange: PropTypes.func.isRequired
 };
 
 export default RegisterComponent;

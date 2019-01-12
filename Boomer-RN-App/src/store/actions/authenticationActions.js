@@ -9,11 +9,9 @@ export const signIn = credentials => (dispatch, getState) =>
       }
     })
     .then(response => {
-      console.log(response);
       dispatch({ type: "SIGN_IN_SUCCESS", response });
     })
     .catch(error => {
-      console.log(error);
       dispatch({ type: "SIGN_IN_ERROR", error });
       throw error;
     });

@@ -93,13 +93,14 @@ export class Authentication extends Component {
     super(props);
     this.renderComponent = this.renderComponent.bind(this);
     this.navigateTo = this.navigateTo.bind(this);
-    this.handleChangeSignIn = this.handleChangeSignIn.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       loading: true,
       pseudoLogin: '',
       passwordLogin: '',
       pseudoRegister: '',
       passwordRegister: '',
+      confirmpasswordRegister: '',
       currentComponent: '/Login'
     };
   }
@@ -113,22 +114,11 @@ export class Authentication extends Component {
     }
   };
 
-  handleChangeSignUp = e => {
-    e.preventDefault();
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  };
-
-  handleChangeSignIn = (e) => {
-    console.log(e);
-    // console.log(text + " " + id);
-    // e.preventDefault();
-    // this.setState({
-    //   [e.target.id]: e.target.value
-    // });
-    this.setState(previousState => ({ pseudoLogin: e }));
-    console.log(this.state.pseudoLogin);
+  handleChange = (e, string) => {
+    this.setState(previousState => ({ [string] : e }));
+    setTimeout(() => {
+      console.log(this.state)
+    }, 1000);
   };
 
   handleSubmitSignUp = e => {
@@ -178,14 +168,14 @@ export class Authentication extends Component {
               <LoginComponent
                 navigate={this.navigateTo}
                 hSubmit={this.handleSubmitSignIn}
-                hChange={this.handleChangeSignIn}
+                hChange={this.handleChange}
                 text="Login"
               />
             ) : (
                 <RegisterComponent
                   navigate={this.navigateTo}
                   hSubmit={this.handleSubmitSignUp}
-                  hChange={this.handleChangeSignUp}
+                  hChange={this.handleChange}
                   text="Register"
                 />
               )}

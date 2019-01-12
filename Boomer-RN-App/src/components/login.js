@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 });
 
 const LoginComponent = props => {
-  const { navigate, hChange } = props;
+  const { navigate, hChange, hSubmit } = props;
   return (
     <Form style={styles.loginForm}>
       <Text style={styles.loginTitle}>Login</Text>
@@ -79,7 +79,9 @@ const LoginComponent = props => {
         <Input
           style={styles.loginInputText}
           id="pseudoLogin"
-          onChangeText={hChange}
+          onChangeText={text => {
+            hChange(text, "pseudoLogin");
+          }}
         />
       </Item>
       <Item floatingLabel style={styles.loginInput}>
@@ -87,7 +89,9 @@ const LoginComponent = props => {
         <Input
           style={styles.loginInputText}
           id="passwordLogin"
-          onChangeText={hChange}
+          onChangeText={text => {
+            hChange(text, "passwordLogin");
+          }}
         />
       </Item>
       <Button
@@ -103,6 +107,7 @@ const LoginComponent = props => {
 
 LoginComponent.propTypes = {
   navigate: PropTypes.func.isRequired,
+  hSubmit: PropTypes.func.isRequired,
   hChange: PropTypes.func.isRequired
 };
 
