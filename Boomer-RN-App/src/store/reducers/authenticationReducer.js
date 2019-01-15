@@ -7,7 +7,7 @@ const initState = {
 
 const authenticationReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'SIGN_IN_SUCCESS':
+    case "SIGN_IN_SUCCESS":
       return {
         ...state,
         authError: null,
@@ -15,30 +15,30 @@ const authenticationReducer = (state = initState, action) => {
         userData: action.response.data
       };
 
-    case 'SIGN_IN_ERROR':
+    case "SIGN_IN_ERROR":
       return {
         ...state,
-        authError: 'Sign In Error : ' + action.error.response.data.message,
+        authError: `Sign In Error : ${action.error.response.data.message}`,
         hasRegistered: false,
         userData: null,
         profile: null
       };
 
-    case 'SIGN_UP_SUCCESS':
+    case "SIGN_UP_SUCCESS":
       return {
         ...state,
         registerError: null,
         hasRegistered: true
       };
 
-    case 'SIGN_UP_ERROR':
+    case "SIGN_UP_ERROR":
       return {
         ...state,
-        registerError: 'Sign Up Error : ' + action.error.response.data.message,
+        registerError: `Sign Up Error : ${action.error.response.data.message}`,
         hasRegistered: false
       };
 
-    case 'SIGN_OUT_SUCCESS':
+    case "SIGN_OUT_SUCCESS":
       return {
         ...state,
         authError: null,
@@ -47,7 +47,7 @@ const authenticationReducer = (state = initState, action) => {
         hasRegistered: false
       };
 
-    case 'SIGN_OUT_ERROR':
+    case "SIGN_OUT_ERROR":
       return {
         ...state
       };
