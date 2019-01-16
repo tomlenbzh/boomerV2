@@ -5,18 +5,12 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import {
   Container,
   Header,
-  Title,
   Content,
-  Footer,
-  FooterTab,
   Button,
   Left,
   Right,
   Body,
-  Icon,
-  List,
-  ListItem,
-  Thumbnail,
+  Label,
   Text
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -138,21 +132,36 @@ export class Home extends Component {
               <Col>
                 <Left>
                   <Button transparent>
-                    <Text style={styles.subHeadertext}>1</Text>
+                    <MaterialCommunityIcons
+                      name="star-outline"
+                      size={32}
+                      color="white"
+                    />
+                    <Text style={styles.subHeadertext}>50</Text>
                   </Button>
                 </Left>
               </Col>
               <Col>
                 <Body>
                   <Button transparent>
-                    <Text style={styles.subHeadertext}>2</Text>
+                    <MaterialCommunityIcons
+                      name="thumb-down-outline"
+                      size={32}
+                      color="white"
+                    />
+                    <Text style={styles.subHeadertext}>10</Text>
                   </Button>
                 </Body>
               </Col>
               <Col>
                 <Right>
-                  <Button transparent>
-                    <Text style={styles.subHeadertext}>3</Text>
+                  <Button transparent onPress={() => navigate('Ranking')}>
+                    <MaterialCommunityIcons
+                      name="trophy-outline"
+                      size={32}
+                      color="white"
+                    />
+                    <Text style={styles.subHeadertext}>1</Text>
                   </Button>
                 </Right>
               </Col>
@@ -167,7 +176,7 @@ export class Home extends Component {
             </Button>
           </View>
 
-          <Content style={{ marginTop: 5 }}>
+          <Content style={{ marginTop: 20 }}>
             <View>
               <RoomsList roomsList={this.roomsList} />
             </View>

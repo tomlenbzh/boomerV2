@@ -13,7 +13,7 @@ export default StyleSheet.create({
     backgroundColor: "#0e2f50"
   },
   subHeader: {
-    backgroundColor: "#0e2f50",
+    backgroundColor: "#164d83",
     marginTop: 0,
     height: 50,
     borderTopColor: "#ed9019",
@@ -29,7 +29,7 @@ export default StyleSheet.create({
     width: "90%",
     marginLeft: "5%",
     marginRight: "5%",
-    backgroundColor: "#0e2f50",
+    backgroundColor: "#164d83",
     borderWidth: 1,
     borderColor: "#ed9019"
   },

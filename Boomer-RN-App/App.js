@@ -5,19 +5,19 @@ import store from "./src/store/store";
 
 // import { Authentication } from "./src/containers/Authentication/authentication";
 import { Home } from "./src/containers/Home/home";
-import { Profile } from "./src/containers/profile";
+import { Profile } from "./src/containers/Profile/profile";
 // import { Room } from "./src/containers/room";
 // import { RoomGenerator } from "./src/containers/generator";
-// import { Ranking } from "./src/containers/ranking";
+import { Ranking } from "./src/containers/Ranking/ranking";
 
 const AppStackNavigator = createStackNavigator(
   {
     // Authentication: { screen: Authentication },
     Home: { screen: Home },
-    Profile: { screen: Profile }
+    Profile: { screen: Profile },
     // Room: { screen: Room },
     // Generator: { screen: RoomGenerator },
-    // Ranking: { screen: Ranking }
+    Ranking: { screen: Ranking }
   },
   { headerMode: "none" }
 );

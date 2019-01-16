@@ -11,23 +11,35 @@ import {
   Text
 } from "native-base";
 
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import styles from "./roomslist.style";
+
 const RoomsList = props => {
   const { roomsList } = props;
   return (
     <List style={{ marginRight: "5%" }}>
       {roomsList &&
         roomsList.map(room => (
-          <ListItem thumbnail key={room.id}>
-            <Left>
-              <Thumbnail square source={{ uri: room.imageURL }} />
+          <ListItem thumbnail key={room.id} style={styles.listItem}>
+            <Left style={{ borderWidth: 0 }}>
+              <Thumbnail
+                square
+                large
+                source={{ uri: room.imageURL }}
+                style={styles.thumbNailStyle}
+              />
             </Left>
-            <Body>
-              <Text>{room.difficulty}</Text>
-              <Text>Its time to build a difference</Text>
+            <Body style={{ borderBottomWidth: 0 }}>
+              <Text style={styles.thumbNailTextStyle}>{room.difficulty}</Text>
             </Body>
-            <Right>
-              <Button transparent>
-                <Text>View</Text>
+            <Right style={{ borderBottomWidth: 0 }}>
+              <Button transparent style={styles.thumbNailButtonStyle}>
+                {/* <Text>View</Text> */}
+                <MaterialCommunityIcons
+                  name="arrow-right"
+                  size={30}
+                  color="white"
+                />
               </Button>
             </Right>
           </ListItem>
