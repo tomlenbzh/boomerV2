@@ -10,10 +10,10 @@ export default StyleSheet.create({
     flex: 1
   },
   headerContent: {
-    backgroundColor: "#0e2f50"
+    backgroundColor: "#16202c"
   },
   subHeader: {
-    backgroundColor: "#164d83",
+    backgroundColor: "#0e2f50",
     marginTop: 0,
     height: 50,
     borderTopColor: "#ed9019",
@@ -29,7 +29,7 @@ export default StyleSheet.create({
     width: "90%",
     marginLeft: "5%",
     marginRight: "5%",
-    backgroundColor: "#164d83",
+    backgroundColor: "#0e2f50",
     borderWidth: 1,
     borderColor: "#ed9019"
   },

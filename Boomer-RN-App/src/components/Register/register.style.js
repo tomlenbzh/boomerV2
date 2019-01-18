@@ -47,7 +47,7 @@ export default StyleSheet.create({
     width: "90%",
     marginTop: "10%",
     marginLeft: "5%",
-    backgroundColor: "#164d83",
+    backgroundColor: "#0e2f50",
     borderWidth: 1,
     borderColor: "#ed9019",
     shadowColor: "#000",

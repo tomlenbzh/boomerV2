@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   listItem: {
-    backgroundColor: "#0e2f50",
+    backgroundColor: "#16202c",
     marginBottom: 5,
     borderWidth: 1,
     borderColor: "#ed9019",
@@ -16,7 +16,7 @@ export default StyleSheet.create({
     color: "white"
   },
   thumbNailButtonStyle: {
-    backgroundColor: "#164d83",
+    backgroundColor: "#0e2f50",
     borderWidth: 1,
     borderColor: "#ed9019",
     height: 50,

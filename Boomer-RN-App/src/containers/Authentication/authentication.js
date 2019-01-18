@@ -10,13 +10,13 @@ import {
   Text
 } from 'native-base';
 import { connect } from 'react-redux';
-import { signIn } from '../../store/actions/authenticationActions';
-import { signUp } from '../../store/actions/authenticationActions';
+import * as AllActions from '../../store/actions/authenticationActions';
 
 import LoginComponent from '../../components/Login/login';
 import RegisterComponent from '../../components/Register/register';
 
 import styles from './authentication.style';
+import { bindActionCreators } from 'redux';
 
 // Authentication.PropTypes = { }
 
@@ -55,11 +55,13 @@ export class Authentication extends Component {
   handleSubmit = (e, action) => {
     console.log('Action : ', action);
     if (action === 'login') {
+      this.navigateTo("Home");
       const credentials = {
         pseudo: 'testLogin',
         password: '@testLogin'
       };
-      signIn(credentials);
+      console.log("props = ", this.props)
+      // this.props.signIn(credentials);
     } else {
       const credentials = {
         pseudo: 'testRegister',
@@ -149,7 +151,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: credentials => dispatch(signIn(credentials)),
+    signIn: credentials => signIn(credentials)(dispatch),
     signUp: credentials => dispatch(signUp(credentials))
   };
 };
