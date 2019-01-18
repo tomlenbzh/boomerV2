@@ -106,7 +106,7 @@ export class Home extends Component {
       <Container>
         <ImageBackground
           source={require('../../../assets/boomer-background.jpg')}
-          style={{ width: '100%', height: '100%' }}
+          style={styles.backgroundImage}
         >
           <Header style={styles.headerContent}>
             <Left style={styles.headerFlex}>
@@ -162,7 +162,7 @@ export class Home extends Component {
                 <Right>
                   <Button transparent onPress={() => navigate('Ranking')}>
                     <MaterialCommunityIcons
-                      name="trophy-outline"
+                      name="format-list-numbers"
                       size={32}
                       color="white"
                     />
@@ -189,12 +189,6 @@ export class Home extends Component {
               />
             </View>
           </Content>
-
-          {/* <Footer>
-            <FooterTab>
-              <Button full />
-            </FooterTab>
-          </Footer> */}
         </ImageBackground>
       </Container>
     );

@@ -55,14 +55,15 @@ export class Authentication extends Component {
   handleSubmit = (e, action) => {
     console.log('Action : ', action);
     if (action === 'login') {
-      this.navigateTo("Home");
+      this.navigateTo('Home');
       const credentials = {
         pseudo: 'testLogin',
         password: '@testLogin'
       };
-      console.log("props = ", this.props)
+      console.log('props = ', this.props);
       // this.props.signIn(credentials);
     } else {
+      this.navigateTo('Home');
       const credentials = {
         pseudo: 'testRegister',
         password: '@testRegister'
@@ -89,12 +90,13 @@ export class Authentication extends Component {
     if (this.state.loading) {
       return <Expo.AppLoading />;
     }
+
     return (
       <Container>
         <Content>
           <ImageBackground
             source={require('../../../assets/boomer-background.jpg')}
-            style={{ width: '100%', height: '100%' }}
+            style={styles.backgroundImage}
           >
             <View style={styles.loginContainer}>
               <View style={styles.headerTitle}>

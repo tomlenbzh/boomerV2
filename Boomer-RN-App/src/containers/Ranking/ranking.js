@@ -21,7 +21,7 @@ import styles from './ranking.style';
 
 export class Ranking extends Component {
   static propTypes = {
-    prop: PropTypes
+    // prop: PropTypes
   };
 
   scoreList = [
@@ -65,7 +65,7 @@ export class Ranking extends Component {
       <Container>
         <ImageBackground
           source={require('../../../assets/boomer-background.jpg')}
-          style={{ width: '100%', height: '100%' }}
+          style={styles.backgroundImage}
         >
           <Header style={styles.headerContent}>
             <Left style={styles.headerFlex}>
@@ -91,17 +91,11 @@ export class Ranking extends Component {
             </Right>
           </Header>
 
-          <Content style={{ marginTop: 20 }}>
+          <Content style={styles.contentStyle}>
             <View>
               <RankingComponent scoreList={this.scoreList} />
             </View>
           </Content>
-
-          {/* <Footer>
-            <FooterTab>
-              <Button full />
-            </FooterTab>
-          </Footer> */}
         </ImageBackground>
       </Container>
     );

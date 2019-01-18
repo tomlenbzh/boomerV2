@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  backgroundImage: {
+    width: "100%",
+    height: "100%"
+  },
   headerTitleText: {
     textAlign: "center",
     fontSize: 25,
@@ -10,6 +14,9 @@ export default StyleSheet.create({
     flex: 1
   },
   headerContent: {
-    backgroundColor: "#0e2f50"
+    backgroundColor: "#16202c"
+  },
+  contentStyle: {
+    marginTop: 20
   }
 });

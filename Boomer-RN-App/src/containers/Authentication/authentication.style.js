@@ -3,9 +3,11 @@ import { StyleSheet, Dimensions } from "react-native";
 const ScreenHeight = Dimensions.get("window").height;
 
 export default StyleSheet.create({
-  headerTitle: {
-    marginTop: "10%"
+  backgroundImage: {
+    width: "100%",
+    height: "100%"
   },
+  headerTitle: { marginTop: "10%" },
   headerTitleText: {
     textAlign: "center",
     fontSize: 50,

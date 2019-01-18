@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  backgroundImage: {
+    width: "100%",
+    height: "100%"
+  },
   headerTitleText: {
     textAlign: "center",
     fontSize: 25,
@@ -10,10 +14,26 @@ export default StyleSheet.create({
     flex: 1
   },
   headerContent: {
-    backgroundColor: "#0e2f50"
+    backgroundColor: "#16202c"
   },
-  thumbNailButtonStyleLeft: {
-    backgroundColor: "#164d83",
+  contentStyle: {
+    marginTop: 5
+  },
+  profileContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20
+  },
+  profilePictureStyle: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#ed9019"
+  },
+  profilePictureButtonStyleLeft: {
+    backgroundColor: "#0e2f50",
     position: "absolute",
     borderWidth: 1,
     borderColor: "#ed9019",
@@ -23,8 +43,8 @@ export default StyleSheet.create({
     padding: 10,
     left: 60
   },
-  thumbNailButtonStyleRight: {
-    backgroundColor: "#164d83",
+  profilePictureButtonStyleRight: {
+    backgroundColor: "#0e2f50",
     position: "absolute",
     borderWidth: 1,
     borderColor: "#ed9019",
@@ -38,7 +58,7 @@ export default StyleSheet.create({
     width: "90%",
     marginLeft: "5%",
     marginRight: "5%",
-    backgroundColor: "#164d83",
+    backgroundColor: "#0e2f50",
     borderWidth: 1,
     borderColor: "#ed9019"
   },
@@ -74,11 +94,18 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ed9019"
   },
+  passwordFormTitle: {
+    width: "100%",
+    textAlign: "center",
+    color: "white",
+    marginBottom: 20,
+    fontSize: 40
+  },
   passwordButton: {
     width: "90%",
     marginTop: "10%",
     marginLeft: "5%",
-    backgroundColor: "#164d83",
+    backgroundColor: "#0e2f50",
     borderWidth: 1,
     borderColor: "#ed9019",
     shadowColor: "#000",
@@ -89,16 +116,22 @@ export default StyleSheet.create({
     width: "100%",
     textAlign: "center"
   },
+  modalContainer: {
+    flex: 1
+  },
   modalCloseButton: {
     position: "absolute",
     top: 20,
     right: 0,
-    backgroundColor: "#164d83",
+    backgroundColor: "#0e2f50",
     borderWidth: 1,
     borderColor: "#ed9019",
     height: 50,
     width: 50,
     borderRadius: 25,
     padding: 5
+  },
+  modalCloseIcon: {
+    textAlign: "center"
   }
 });

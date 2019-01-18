@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   rankingItem: {
-    backgroundColor: "#0e2f50",
+    backgroundColor: "#16202c",
     paddingLeft: 0,
     width: "90%",
     marginLeft: "5%",

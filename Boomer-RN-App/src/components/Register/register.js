@@ -13,7 +13,7 @@ const RegisterComponent = props => {
       <Item floatingLabel style={styles.registerInput}>
         <Label style={styles.registerLabel}>Username</Label>
         <Input
-          style={styles.loginInputText}
+          style={styles.RegisterInputText}
           onChangeText={text => {
             hChange(text, "pseudoRegister");
           }}
@@ -31,7 +31,7 @@ const RegisterComponent = props => {
       <Item floatingLabel style={styles.registerInput}>
         <Label style={styles.registerLabel}>Confirm password</Label>
         <Input
-          style={styles.loginInputText}
+          style={styles.RegisterInputText}
           onChangeText={text => {
             hChange(text, "confirmpasswordRegister");
           }}

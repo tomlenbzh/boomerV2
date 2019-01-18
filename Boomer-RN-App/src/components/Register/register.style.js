@@ -9,7 +9,7 @@ export default StyleSheet.create({
   headerTitleText: {
     textAlign: "center",
     fontSize: 50,
-    color: "#FFF"
+    color: "#16202c"
   },
   registerContainer: {
     height: ScreenHeight,
@@ -21,7 +21,7 @@ export default StyleSheet.create({
     marginTop: "5%",
     color: "#FFFFFF"
   },
-  loginInputText: {
+  RegisterInputText: {
     color: "white"
   },
   registerInput: {

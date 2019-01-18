@@ -73,7 +73,7 @@ export class Profile extends Component {
       <Container>
         <ImageBackground
           source={require('../../../assets/boomer-background.jpg')}
-          style={{ width: '100%', height: '100%' }}
+          style={styles.backgroundImage}
         >
           <Header style={styles.headerContent}>
             <Left style={styles.headerFlex}>
@@ -99,33 +99,20 @@ export class Profile extends Component {
             </Right>
           </Header>
 
-          <Content style={{ marginTop: 5 }}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 20
-              }}
-            >
+          <Content style={styles.contentStyle}>
+            <View style={styles.profileContainer}>
               <Image
                 source={{
                   uri: image
                     ? image
                     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBy99Qq2D8P2rmXcJi-SzGvHN6M9xT0t3ss0v5k7by10ZukhTo'
                 }}
-                style={{
-                  width: 200,
-                  height: 200,
-                  borderRadius: 100,
-                  borderWidth: 1,
-                  borderColor: '#ed9019'
-                }}
+                style={styles.profilePictureStyle}
               />
               <Button
                 primary
                 onPress={this._pickImage}
-                style={styles.thumbNailButtonStyleLeft}
+                style={styles.profilePictureButtonStyleLeft}
               >
                 <MaterialCommunityIcons
                   name="image-plus"
@@ -137,38 +124,14 @@ export class Profile extends Component {
               <Button
                 primary
                 onPress={this._takePhoto}
-                style={styles.thumbNailButtonStyleRight}
+                style={styles.profilePictureButtonStyleRight}
               >
                 <MaterialCommunityIcons name="camera" size={30} color="white" />
               </Button>
             </View>
 
-            <View
-              style={{
-                width: '90%',
-                marginLeft: '5%',
-                marginRight: '5%',
-                marginTop: 20,
-                marginBottom: 20,
-                paddingTop: 20,
-                paddingBottom: 20,
-                backgroundColor: '#0e2f50',
-                borderWidth: 1,
-                borderColor: '#ed9019',
-                borderRadius: 10
-              }}
-            >
-              <Text
-                style={{
-                  width: '100%',
-                  textAlign: 'center',
-                  color: 'white',
-                  marginBottom: 20,
-                  fontSize: 40
-                }}
-              >
-                Pseudo
-              </Text>
+            <View style={styles.passwordForm}>
+              <Text style={styles.passwordFormTitle}>tomlenbzh</Text>
               <Button
                 rounded
                 style={styles.changePasswordButton}
@@ -180,7 +143,7 @@ export class Profile extends Component {
               </Button>
 
               <Modal isVisible={this.state.isModalVisible}>
-                <View style={{ flex: 1 }}>
+                <View style={styles.modalContainer}>
                   <View>
                     <Text>Modifiez votre mot de passe</Text>
 
@@ -210,7 +173,7 @@ export class Profile extends Component {
                         name="close"
                         size={40}
                         color="white"
-                        style={{ textAlign: 'center' }}
+                        style={styles.modalCloseIcon}
                       />
                     </TouchableOpacity>
                   </View>
@@ -218,12 +181,6 @@ export class Profile extends Component {
               </Modal>
             </View>
           </Content>
-
-          {/* <Footer>
-            <FooterTab>
-              <Button full />
-            </FooterTab>
-          </Footer> */}
         </ImageBackground>
       </Container>
     );
