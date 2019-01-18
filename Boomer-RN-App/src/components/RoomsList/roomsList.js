@@ -36,7 +36,7 @@ const RoomsList = props => {
               <Button
                 transparent
                 style={styles.thumbNailButtonStyle}
-                onPress={navigate("Room")}
+                onPress={() => navigate("Room")}
               >
                 {/* <Text>View</Text> */}
                 <MaterialCommunityIcons
