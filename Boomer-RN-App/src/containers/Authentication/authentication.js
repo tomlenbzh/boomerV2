@@ -153,7 +153,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: credentials => signIn(credentials)(dispatch),
+    signIn: credentials => dispatch(signIn(credentials)),
     signUp: credentials => dispatch(signUp(credentials))
   };
 };
