@@ -10,7 +10,6 @@ import {
   Left,
   Right,
   Body,
-  Label,
   Text
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -24,6 +23,7 @@ import styles from './home.style';
 export class Home extends Component {
   constructor(props) {
     super(props);
+    this.navigateTo = this.navigateTo.bind(this);
     this.state = { loading: true };
   }
 
@@ -90,6 +90,11 @@ export class Home extends Component {
       imageURL: 'https://www.wonderplugin.com/videos/demo-image0.jpg'
     }
   ];
+
+  navigateTo = path => {
+    console.log('navigate to : ' + path);
+    this.props.navigation.navigate(path);
+  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -178,7 +183,10 @@ export class Home extends Component {
 
           <Content style={{ marginTop: 20 }}>
             <View>
-              <RoomsList roomsList={this.roomsList} />
+              <RoomsList
+                roomsList={this.roomsList}
+                navigate={this.navigateTo}
+              />
             </View>
           </Content>
 

@@ -6,8 +6,8 @@ import store from "./src/store/store";
 // import { Authentication } from "./src/containers/Authentication/authentication";
 import { Home } from "./src/containers/Home/home";
 import { Profile } from "./src/containers/Profile/profile";
-// import { Room } from "./src/containers/room";
-// import { RoomGenerator } from "./src/containers/generator";
+import { Room } from "./src/containers/Room/room";
+// import { RoomGenerator } from "./src/containers/Generator/generator";
 import { Ranking } from "./src/containers/Ranking/ranking";
 
 const AppStackNavigator = createStackNavigator(
@@ -15,7 +15,7 @@ const AppStackNavigator = createStackNavigator(
     // Authentication: { screen: Authentication },
     Home: { screen: Home },
     Profile: { screen: Profile },
-    // Room: { screen: Room },
+    Room: { screen: Room },
     // Generator: { screen: RoomGenerator },
     Ranking: { screen: Ranking }
   },
