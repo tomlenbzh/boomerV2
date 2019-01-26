@@ -47,29 +47,29 @@ export class Authentication extends Component {
 
   handleChange = (e, field) => {
     this.setState(previousState => ({ [field]: e }));
-    setTimeout(() => {
-      console.log(this.state);
-    }, 1000);
   };
 
   handleSubmit = (e, action) => {
     console.log('Action : ', action);
     if (action === 'login') {
-      this.navigateTo('Home');
+      // this.navigateTo('Home');
       const credentials = {
-        pseudo: 'testLogin',
-        password: '@testLogin'
+        pseudo: this.state.pseudoLogin,
+        password: this.state.passwordLogin
       };
-      console.log('props = ', this.props);
-      // this.props.signIn(credentials);
-    } else {
-      this.navigateTo('Home');
-      const credentials = {
-        pseudo: 'testRegister',
-        password: '@testRegister'
-      };
-      this.props.signUp(credentials);
+      // console.log('props = ', this.props);
+      this.props.signIn(credentials, () => {
+        console.log('Auth props : ', this.props.auth);
+      });
     }
+    // else {
+    //   this.navigateTo('Home');
+    //   const credentials = {
+    //     pseudo: 'testRegister',
+    //     password: '@testRegister'
+    //   };
+    //   this.props.signUp(credentials);
+    // }
   };
 
   navigateTo(path) {
@@ -87,6 +87,11 @@ export class Authentication extends Component {
   }
 
   render() {
+
+    const { auth } = this.props;
+
+    if (auth) this.navigateTo('Home');
+
     if (this.state.loading) {
       return <Expo.AppLoading />;
     }
@@ -110,13 +115,13 @@ export class Authentication extends Component {
                   text="Login"
                 />
               ) : (
-                <RegisterComponent
-                  navigate={this.navigateTo}
-                  hSubmit={this.handleSubmit}
-                  hChange={this.handleChange}
-                  text="Register"
-                />
-              )}
+                  <RegisterComponent
+                    navigate={this.navigateTo}
+                    hSubmit={this.handleSubmit}
+                    hChange={this.handleChange}
+                    text="Register"
+                  />
+                )}
             </View>
           </ImageBackground>
         </Content>
@@ -153,8 +158,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: credentials => dispatch(signIn(credentials)),
-    signUp: credentials => dispatch(signUp(credentials))
+    signIn: credentials => dispatch(AllActions.signIn(credentials)),
+    signUp: credentials => dispatch(AllActions.signUp(credentials))
   };
 };
 

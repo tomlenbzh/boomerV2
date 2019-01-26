@@ -1,19 +1,20 @@
 import axios from "axios";
 // import { API_URL } from "../../environment";
 
-export const signIn = credentials => async (dispatch, getState) => {
+export const signIn = credentials => async dispatch => {
   try {
-    console.log("Hello Sign In !");
+    console.log("Credentials : ", credentials);
     const response = await axios.post(
-      `https://alexandremartins.net/auths/signup`,
+      `https://alexandremartins.net/auths/login`,
       credentials,
       {
         headers: { "content-type": "application/json; charset=UTF-8" }
       }
     );
-    console.log("Lalalala");
+    console.log("Dispatch success : ", response);
     dispatch({ type: "SIGN_IN_SUCCESS", response });
   } catch (error) {
+    console.log("Dispatch error : ", error);
     dispatch({ type: "SIGN_IN_ERROR", error });
     throw error;
   }

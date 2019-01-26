@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import store from "./src/store/store";
 
-import { Authentication } from "./src/containers/Authentication/authentication";
+import Authentication from "./src/containers/Authentication/authentication";
 import { Home } from "./src/containers/Home/home";
 import { Profile } from "./src/containers/Profile/profile";
 import { Room } from "./src/containers/Room/room";
