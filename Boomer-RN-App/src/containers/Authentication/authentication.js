@@ -62,14 +62,15 @@ export class Authentication extends Component {
         console.log('Auth props : ', this.props.auth);
       });
     }
-    // else {
-    //   this.navigateTo('Home');
-    //   const credentials = {
-    //     pseudo: 'testRegister',
-    //     password: '@testRegister'
-    //   };
-    //   this.props.signUp(credentials);
-    // }
+    else {
+      this.navigateTo('Home');
+      const credentials = {
+        pseudo: this.state.pseudoRegister,
+        password: this.state.passwordRegister,
+        password_confirmation: this.state.confirmpasswordRegister
+      };
+      this.props.signUp(credentials);
+    }
   };
 
   navigateTo(path) {

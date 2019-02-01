@@ -2,22 +2,22 @@ import axios from "axios";
 // import { API_URL } from "../../environment";
 
 export const signIn = credentials => async dispatch => {
-  try {
-    console.log("Credentials : ", credentials);
-    const response = await axios.post(
-      `https://alexandremartins.net/auths/login`,
-      credentials,
-      {
-        headers: { "content-type": "application/json; charset=UTF-8" }
+  axios
+    .post(`https://alexandremartins.net/auths/login`, credentials, {
+      headers: {
+        "cache-control": "no-cache",
+        "content-type": "application/json"
       }
-    );
-    console.log("Dispatch success : ", response);
-    dispatch({ type: "SIGN_IN_SUCCESS", response });
-  } catch (error) {
-    console.log("Dispatch error : ", error);
-    dispatch({ type: "SIGN_IN_ERROR", error });
-    throw error;
-  }
+    })
+    .then(response => {
+      console.log("Dispatch sucess : ", response);
+      dispatch({ type: "SIGN_IN_SUCCESS", response });
+    })
+    .catch(error => {
+      console.log("Dispatch error : ", error);
+      dispatch({ type: "SIGN_IN_ERROR", error });
+      throw error;
+    });
 };
 
 // export const signIn = credentials => (dispatch, getState) =>
@@ -41,9 +41,11 @@ export const signUp = credentials => (dispatch, getState) =>
       }
     })
     .then(response => {
+      // console.log(response);
       dispatch({ type: "SIGN_UP_SUCCESS", response });
     })
     .catch(error => {
+      // console.log(error);
       dispatch({ type: "SIGN_UP_ERROR", error });
       throw error;
     });
