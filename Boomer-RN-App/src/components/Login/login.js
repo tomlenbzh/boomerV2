@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import styles from "./login.style";
 
 const LoginComponent = props => {
-  const { hChange, hSubmit } = props;
+  const { hChange, hSubmit, aError, text } = props;
   return (
     <Form style={styles.loginForm}>
       <Text style={styles.loginTitle}>Login</Text>
@@ -34,8 +34,9 @@ const LoginComponent = props => {
         style={styles.loginButton}
         onPress={submit => hSubmit(submit, "login")}
       >
-        <Text style={styles.loginButtonText}>Login</Text>
+        <Text style={styles.loginButtonText}>{text}</Text>
       </Button>
+      {aError !== null ? <Text>Auth Error</Text> : null}
     </Form>
   );
 };

@@ -18,10 +18,11 @@ import {
   Input
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { signOut } from '../../store/actions/authenticationActions';
 
 import styles from './profile.style';
 
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 export class Profile extends Component {
   constructor(props) {
@@ -33,8 +34,8 @@ export class Profile extends Component {
     title: 'Boomer'
   };
 
-  _toggleModal = () =>
-    this.setState({ isModalVisible: !this.state.isModalVisible });
+  // _toggleModal = () =>
+  //   this.setState({ isModalVisible: !this.state.isModalVisible });
 
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -67,6 +68,7 @@ export class Profile extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const { auth } = this.props;
     let { image } = this.state;
 
     return (
@@ -128,57 +130,14 @@ export class Profile extends Component {
               >
                 <MaterialCommunityIcons name="camera" size={30} color="white" />
               </Button>
-            </View>
 
-            <View style={styles.passwordForm}>
-              <Text style={styles.passwordFormTitle}>tomlenbzh</Text>
-              <Button
-                rounded
-                style={styles.changePasswordButton}
-                onPress={this._toggleModal}
-              >
-                <Text style={styles.changePasswordButtonText}>
-                  Changez votre mot de passe
-                </Text>
+              <Button primary>
+                <Text>Sign Out</Text>
               </Button>
 
-              <Modal isVisible={this.state.isModalVisible}>
-                <View style={styles.modalContainer}>
-                  <View>
-                    <Text>Modifiez votre mot de passe</Text>
-
-                    <Form style={styles.passwordForm}>
-                      <Text style={styles.passwordTitle}>
-                        Modifiez votre mot de passe
-                      </Text>
-                      <Item floatingLabel style={styles.passwordInput}>
-                        <Label style={styles.passwordLabel}>
-                          Nouveau mot de passe
-                        </Label>
-                        <Input style={styles.passwordInputText} id="" />
-                      </Item>
-                      <Item floatingLabel style={styles.passwordInput}>
-                        <Label style={styles.passwordLabel}>Confirmation</Label>
-                        <Input style={styles.passwordInputText} id="" />
-                      </Item>
-                      <Button rounded style={styles.passwordButton}>
-                        <Text style={styles.passwordButtonText}>Valider</Text>
-                      </Button>
-                    </Form>
-                    <TouchableOpacity
-                      onPress={this._toggleModal}
-                      style={styles.modalCloseButton}
-                    >
-                      <MaterialCommunityIcons
-                        name="close"
-                        size={40}
-                        color="white"
-                        style={styles.modalCloseIcon}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </Modal>
+              <View style={styles.passwordForm}>
+                <Text style={styles.passwordFormTitle}>{auth.data.pseudo}</Text>
+              </View>
             </View>
           </Content>
         </ImageBackground>
@@ -187,8 +146,15 @@ export class Profile extends Component {
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth.userData
+});
 
-// const mapDispatchToProps = {};
+// const mapDispatchToProps = dispatch => {
+//   { }
+// };
 
-export default Profile;
+export default connect(
+  mapStateToProps,
+  null
+)(Profile);

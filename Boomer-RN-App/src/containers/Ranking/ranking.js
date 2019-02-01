@@ -13,9 +13,11 @@ import {
   Text
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import RankingComponent from '../../components/Ranking/ranking';
+
+import { getTopScores } from '../../store/actions/scoresActions';
 
 import styles from './ranking.style';
 
@@ -24,43 +26,14 @@ export class Ranking extends Component {
     // prop: PropTypes
   };
 
-  scoreList = [
-    {
-      position: '1',
-      pseudo: 'tomlenbzh',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-cDQBqhVvItA9BEeuZiUOHuZaG661kx2anGilfNGuOYejjKfL',
-      score: '321'
-    },
-    {
-      position: '2',
-      pseudo: 'lalala',
-      imageURL: 'https://images7.alphacoders.com/331/331512.jpg',
-      score: '300'
-    },
-    {
-      position: '3',
-      pseudo: 'Hello',
-      imageURL: 'https://www.wonderplugin.com/videos/demo-image0.jpg',
-      score: '250'
-    },
-    {
-      position: '4',
-      pseudo: 'Test',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-cDQBqhVvItA9BEeuZiUOHuZaG661kx2anGilfNGuOYejjKfL',
-      score: '200'
-    },
-    {
-      position: '5',
-      pseudo: 'Naze',
-      imageURL: 'https://images7.alphacoders.com/331/331512.jpg',
-      score: '150'
-    }
-  ];
+  async componentDidMount() {
+    this.props.getTopScores();
+  }
 
   render() {
     const { navigate } = this.props.navigation;
+    const { scores } = this.props;
+
     return (
       <Container>
         <ImageBackground
@@ -93,7 +66,7 @@ export class Ranking extends Component {
 
           <Content style={styles.contentStyle}>
             <View>
-              <RankingComponent scoreList={this.scoreList} />
+              <RankingComponent scoreList={scores} />
             </View>
           </Content>
         </ImageBackground>
@@ -102,8 +75,15 @@ export class Ranking extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  scores: state.scores.scores
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => ({
+  getTopScores: () => dispatch(getTopScores())
+});
 
-export default Ranking;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Ranking);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
 import { Col, Row, Grid } from 'react-native-easy-grid';
@@ -18,7 +19,8 @@ import RoomsList from '../../components/RoomsList/roomsList';
 
 import styles from './home.style';
 
-// import { connect } from 'react-redux';
+import { getRooms } from '../../store/actions/roomsActions';
+import { getUserData } from '../../store/actions/userActions'
 
 export class Home extends Component {
   constructor(props) {
@@ -36,71 +38,35 @@ export class Home extends Component {
     this.setState({ loading: false });
   }
 
+  async componentDidMount() {
+    if (this.props.auth) {
+      this.props.getRooms();
+    } else {
+      this.navigateTo('/Login');
+    }
+  }
+
   static navigationOptions = {
     title: 'Boomer'
   };
 
-  roomsList = [
-    {
-      id: '1',
-      difficulty: 'Hard',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-cDQBqhVvItA9BEeuZiUOHuZaG661kx2anGilfNGuOYejjKfL'
-    },
-    {
-      id: '2',
-      difficulty: 'Extreme',
-      imageURL: 'https://images7.alphacoders.com/331/331512.jpg'
-    },
-    {
-      id: '3',
-      difficulty: 'Hard',
-      imageURL: 'https://www.wonderplugin.com/videos/demo-image0.jpg'
-    },
-    {
-      id: '4',
-      difficulty: 'Hard',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-cDQBqhVvItA9BEeuZiUOHuZaG661kx2anGilfNGuOYejjKfL'
-    },
-    {
-      id: '5',
-      difficulty: 'Extreme',
-      imageURL: 'https://images7.alphacoders.com/331/331512.jpg'
-    },
-    {
-      id: '6',
-      difficulty: 'Hard',
-      imageURL: 'https://www.wonderplugin.com/videos/demo-image0.jpg'
-    },
-    {
-      id: '7',
-      difficulty: 'Hard',
-      imageURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-cDQBqhVvItA9BEeuZiUOHuZaG661kx2anGilfNGuOYejjKfL'
-    },
-    {
-      id: '8',
-      difficulty: 'Extreme',
-      imageURL: 'https://images7.alphacoders.com/331/331512.jpg'
-    },
-    {
-      id: '9',
-      difficulty: 'Hard',
-      imageURL: 'https://www.wonderplugin.com/videos/demo-image0.jpg'
-    }
-  ];
-
-  navigateTo = path => {
-    console.log('navigate to : ' + path);
-    this.props.navigation.navigate(path);
+  navigateTo = (path, param = null) => {
+    this.props.navigation.navigate(path, param);
   };
 
   render() {
-    const { navigate } = this.props.navigation;
     if (this.state.loading) {
       return <Expo.AppLoading />;
     }
+
+    const { navigate } = this.props.navigation;
+    const { rooms, auth, user } = this.props;
+
+    // if (!auth) (this.navigateTo('/Login'));
+
+    let userInfo = null;
+    if (auth && user) userInfo = user;
+    else userInfo = auth.data;
 
     return (
       <Container>
@@ -142,7 +108,7 @@ export class Home extends Component {
                       size={32}
                       color="white"
                     />
-                    <Text style={styles.subHeadertext}>50</Text>
+                    <Text style={styles.subHeadertext}>{userInfo.score}</Text>
                   </Button>
                 </Left>
               </Col>
@@ -154,7 +120,7 @@ export class Home extends Component {
                       size={32}
                       color="white"
                     />
-                    <Text style={styles.subHeadertext}>10</Text>
+                    <Text style={styles.subHeadertext}>{userInfo.defeat}</Text>
                   </Button>
                 </Body>
               </Col>
@@ -166,7 +132,7 @@ export class Home extends Component {
                       size={32}
                       color="white"
                     />
-                    <Text style={styles.subHeadertext}>1</Text>
+                    <Text style={styles.subHeadertext}></Text>
                   </Button>
                 </Right>
               </Col>
@@ -177,14 +143,14 @@ export class Home extends Component {
             <Button rounded style={styles.genLinkButton}>
               <Text style={styles.genLinkButtonText}>
                 Créez votre propre room !
-              </Text>
+                </Text>
             </Button>
           </View>
 
           <Content style={{ marginTop: 20 }}>
             <View>
               <RoomsList
-                roomsList={this.roomsList}
+                roomsList={rooms}
                 navigate={this.navigateTo}
               />
             </View>
@@ -195,8 +161,20 @@ export class Home extends Component {
   }
 }
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  rooms: state.rooms.rooms,
+  auth: state.auth.userData,
+  user: state.user.userInfos,
+  // scores: state.scores.scores
+});
 
-// const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => ({
+  getRooms: () => dispatch(getRooms()),
+  getUserData: pseudo => dispatch(getUserData(pseudo)),
+  // getTopScores: () => dispatch(getTopScores())
+});
 
-export default Home;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

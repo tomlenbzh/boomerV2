@@ -7,7 +7,8 @@ import {
   Footer,
   FooterTab,
   Button,
-  Text
+  Text,
+  Toast
 } from 'native-base';
 import { connect } from 'react-redux';
 import * as AllActions from '../../store/actions/authenticationActions';
@@ -50,20 +51,15 @@ export class Authentication extends Component {
   };
 
   handleSubmit = (e, action) => {
-    console.log('Action : ', action);
     if (action === 'login') {
-      // this.navigateTo('Home');
       const credentials = {
         pseudo: this.state.pseudoLogin,
         password: this.state.passwordLogin
       };
-      // console.log('props = ', this.props);
-      this.props.signIn(credentials, () => {
-        console.log('Auth props : ', this.props.auth);
-      });
+      this.props.signIn(credentials);
+      console.log("Auth Error : ", this.props.authError);
     }
     else {
-      this.navigateTo('Home');
       const credentials = {
         pseudo: this.state.pseudoRegister,
         password: this.state.passwordRegister,
@@ -74,7 +70,6 @@ export class Authentication extends Component {
   };
 
   navigateTo(path) {
-    console.log('navigate to : ' + path);
     this.props.navigation.navigate(path);
   }
 
@@ -89,13 +84,10 @@ export class Authentication extends Component {
 
   render() {
 
-    const { auth } = this.props;
-
-    if (auth) this.navigateTo('Home');
-
-    if (this.state.loading) {
-      return <Expo.AppLoading />;
-    }
+    const { auth, hasRegistered, authError, registerError } = this.props;
+    if (hasRegistered && !auth) { this.state.currentComponent = '/Login'; }
+    if (auth) { this.navigateTo('Home'); }
+    if (this.state.loading) { return <Expo.AppLoading />; }
 
     return (
       <Container>
@@ -110,16 +102,16 @@ export class Authentication extends Component {
               </View>
               {this.state.currentComponent === '/Login' ? (
                 <LoginComponent
-                  navigate={this.navigateTo}
                   hSubmit={this.handleSubmit}
                   hChange={this.handleChange}
+                  aError={authError ? <p>{authError}</p> : null}
                   text="Login"
                 />
               ) : (
                   <RegisterComponent
-                    navigate={this.navigateTo}
                     hSubmit={this.handleSubmit}
                     hChange={this.handleChange}
+                    rError={registerError ? <p>{registerError}</p> : null}
                     text="Register"
                   />
                 )}
@@ -149,10 +141,11 @@ export class Authentication extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  //state.auth.registerError = null;
+const mapStateToProps = (state, ownProps) => {
   return {
-    //authError: state.auth.authError,
+    authError: state.auth.authError,
+    registerError: state.auth.registerError,
+    hasRegistered: state.auth.hasRegistered,
     auth: state.auth.userData
   };
 };

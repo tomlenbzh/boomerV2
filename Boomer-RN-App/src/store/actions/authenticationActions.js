@@ -10,28 +10,15 @@ export const signIn = credentials => async dispatch => {
       }
     })
     .then(response => {
-      console.log("Dispatch sucess : ", response);
       dispatch({ type: "SIGN_IN_SUCCESS", response });
+      console.log("Dispatch sucess");
     })
     .catch(error => {
-      console.log("Dispatch error : ", error);
       dispatch({ type: "SIGN_IN_ERROR", error });
+      console.log("Dispatch error : ", error);
       throw error;
     });
 };
-
-// export const signIn = credentials => (dispatch, getState) =>
-//   axios
-//     .post(`https://alexandremartins.net/auths/login`, credentials, {
-//       headers: { "Content-type": "application/json; charset=UTF-8" }
-//     })
-//     .then(response => {
-//       dispatch({ type: "SIGN_IN_SUCCESS", response });
-//     })
-//     .catch(error => {
-//       dispatch({ type: "SIGN_IN_ERROR", error });
-//       throw error;
-//     });
 
 export const signUp = credentials => (dispatch, getState) =>
   axios
@@ -52,7 +39,7 @@ export const signUp = credentials => (dispatch, getState) =>
 
 export const signOut = () => (dispatch, getState) =>
   axios
-    .get(`/auths/logout`)
+    .get(`https://alexandremartins.net/auths/logout`)
     .then(response => {
       dispatch({ type: "SIGN_OUT_SUCCESS", response });
     })

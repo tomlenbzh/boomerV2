@@ -9,22 +9,18 @@ import styles from "./ranking.style";
 
 const RankingComponent = props => {
   const { scoreList } = props;
+  console.log("score : ", scoreList);
   return (
     <List>
       {scoreList &&
-        scoreList.map(item => (
-          <ListItem
-            avatar
-            noIndent
-            style={styles.rankingItem}
-            key={item.position}
-          >
+        scoreList.data.map(item => (
+          <ListItem avatar noIndent style={styles.rankingItem} key={item.rank}>
             <Col>
-              <Text style={styles.rankingPosition}>{item.position}</Text>
+              <Text style={styles.rankingPosition}>{item.rank}</Text>
             </Col>
             <Col>
               <Thumbnail
-                source={{ uri: item.imageURL }}
+                source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-cDQBqhVvItA9BEeuZiUOHuZaG661kx2anGilfNGuOYejjKfL"
                 style={styles.rankingThumbnail}
               />
             </Col>
@@ -40,14 +36,14 @@ const RankingComponent = props => {
   );
 };
 RankingComponent.propTypes = {
-  scoreList: PropTypes.arrayOf(
-    PropTypes.shape({
-      position: PropTypes.string.isRequired,
-      pseudo: PropTypes.string.isRequired,
-      imageURL: PropTypes.string.isRequired,
-      score: PropTypes.string
-    })
-  ).isRequired
+  // scoreList: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     position: PropTypes.string.isRequired,
+  //     pseudo: PropTypes.string.isRequired,
+  //     imageURL: PropTypes.string.isRequired,
+  //     score: PropTypes.string
+  //   })
+  // ).isRequired
 };
 
 export default RankingComponent;

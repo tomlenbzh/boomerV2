@@ -85,7 +85,6 @@ export default StyleSheet.create({
   passwordForm: {
     width: "90%",
     marginTop: "5%",
-    paddingBottom: "10%",
     marginLeft: "5%",
     marginRight: "5%",
     padding: "5%",

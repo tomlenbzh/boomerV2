@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import styles from "./register.style";
 
 const RegisterComponent = props => {
-  const { hChange, hSubmit } = props;
+  const { hChange, hSubmit, rError } = props;
 
   return (
     <Form style={styles.registerForm}>
@@ -44,13 +44,15 @@ const RegisterComponent = props => {
       >
         <Text style={styles.registerButtonText}>Register</Text>
       </Button>
+      {rError !== null ? <Text>Register Error</Text> : null}
     </Form>
   );
 };
 
 RegisterComponent.propTypes = {
   hSubmit: PropTypes.func.isRequired,
-  hChange: PropTypes.func.isRequired
+  hChange: PropTypes.func.isRequired,
+  rError: PropTypes.string
 };
 
 export default RegisterComponent;
