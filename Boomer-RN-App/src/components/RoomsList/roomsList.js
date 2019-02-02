@@ -15,7 +15,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./roomslist.style";
 
 const RoomsList = props => {
-  const { roomsList, navigate } = props;
+  const { roomsList, navigate, score } = props;
 
   return (
     <List style={{ marginRight: "5%" }}>
@@ -41,7 +41,8 @@ const RoomsList = props => {
                 style={styles.thumbNailButtonStyle}
                 onPress={() =>
                   navigate("Room", {
-                    roomId: room.id
+                    roomId: room.id,
+                    userScore: score
                   })
                 }
               >

@@ -22,13 +22,14 @@ import {
   FooterTab
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { setReload } from '../../store/actions/reloadActions';
 
 import styles from './room.style';
 // import { connect } from 'react-redux';
 
 import openSocket from 'socket.io-client';
 
-const socket = openSocket("https://alexandremartins.net/");
+const socket = openSocket("https://alexandremartins.net/", { jsonp: false, transports: ['websocket'] });
 
 export class Room extends Component {
   constructor(props) {
@@ -38,9 +39,15 @@ export class Room extends Component {
       click_X: undefined,
       click_Y: undefined,
       redirect: false,
-      score: this.props.auth.data.score,
+      score: this.props.navigation.getParam('userScore'),
       players: 0
     };
+
+    this.setState(previousState => ({ score : this.props.navigation.getParam('userScore') }));
+    const roomId = this.props.navigation.getParam('roomId');
+    this.currentRoom = this.props.rooms.data.filter(room => room.id == roomId);
+
+    console.log(this.state.score);
 
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gestureState) => true,
@@ -48,23 +55,36 @@ export class Room extends Component {
         console.warn('Check Moves !', gestureState.moveX);
       }
     });
-
+    console.log("joinRoom")
     socket.emit('joinRoom', {
       roomId: this.props.navigation.getParam('roomId'),
       userPseudo: this.props.auth.data.pseudo,
       userId: this.props.auth.data.id
     },
-      console.log("emit join room : ", this.props.navigation.getParam('roomId') + " / " + this.props.auth.data.pseudo + " / " + this.props.auth.data.id)
+      console.log(this.props.navigation.getParam('roomId'),
+      this.props.auth.data.pseudo,
+      this.props.auth.data.id)
     );
 
-    socket.on('destroy', this.setRedirectToTrue);
+    socket.on('destroy', this.destroy);
     socket.on('score', this.updateScore);
     socket.on('players', this.updatePlayers);
   }
 
-  componentWillUnmount() {
+  destroy = () => {
     const id = this.props.navigation.getParam('roomId');
-    socket.emit('leaveRoom', { roomId: id }, console.log("emit leave room"));
+    console.log("leaveRoom")
+    socket.emit('leaveRoom', { roomId: id });
+    this.props.setReload(true);
+    this.props.navigation.navigate('Home');    
+  }
+
+  leave(path) {
+    const id = this.props.navigation.getParam('roomId');
+    console.log("leaveRoom")
+    socket.emit('leaveRoom', { roomId: id });
+    this.props.setReload(true);
+    this.props.navigation.navigate(path);
   }
 
   updateScore = score => {
@@ -106,10 +126,9 @@ export class Room extends Component {
     const { navigate } = this.props.navigation;
     const { rooms, auth } = this.props;
     const roomId = this.props.navigation.getParam('roomId');
-    const currentRoom = rooms.data.filter(room => room.id == roomId);
 
     function sendClick() {
-      console.log("Hello")
+      console.log("playerClick")
       socket.emit('playerClick', {});
     }
 
@@ -123,7 +142,7 @@ export class Room extends Component {
         >
           <Header style={styles.headerContent}>
             <Left style={styles.headerFlex}>
-              <Button transparent onPress={() => navigate('Home')}>
+              <Button transparent onPress={() => this.leave('Home')}>
                 <MaterialCommunityIcons
                   name="home-outline"
                   size={32}
@@ -135,7 +154,7 @@ export class Room extends Component {
               <Text style={styles.headerTitleText}>Boomer</Text>
             </Body>
             <Right style={styles.headerFlex}>
-              <Button transparent onPress={() => navigate('Profile')}>
+              <Button transparent onPress={() => this.leave('Profile')}>
                 <MaterialCommunityIcons
                   name="account-convert"
                   size={30}
@@ -148,7 +167,7 @@ export class Room extends Component {
           <View style={styles.subHeader}>
             <Grid>
               <Col>
-                <Text style={styles.subHeadertext}>{currentRoom[0].difficulty.title}</Text>
+                <Text style={styles.subHeadertext}>{this.currentRoom[0].difficulty.title}</Text>
               </Col>
             </Grid>
           </View>
@@ -160,7 +179,7 @@ export class Room extends Component {
             >
               <ImageBackground
                 source={{
-                  uri: currentRoom[0].difficulty.background
+                  uri: this.currentRoom[0].difficulty.background
                 }}
                 style={styles.roomBackground}
               >
@@ -213,4 +232,11 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Room);
+const mapDispatchToProps = dispatch => ({
+  setReload: reload => dispatch(setReload(reload)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Room);

@@ -37,7 +37,7 @@ export class Authentication extends Component {
       currentComponent: '/Login'
     };
   }
-
+  
   renderComponent(toRender) {
     if (toRender === '/Login') {
       this.setState(previousState => ({ currentComponent: '/Login' }));
@@ -80,6 +80,7 @@ export class Authentication extends Component {
       Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf')
     });
     this.setState({ loading: false });
+    console.disableYellowBox = true;
   }
 
   render() {

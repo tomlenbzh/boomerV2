@@ -20,13 +20,16 @@ import RoomsList from '../../components/RoomsList/roomsList';
 import styles from './home.style';
 
 import { getRooms } from '../../store/actions/roomsActions';
-import { getUserData } from '../../store/actions/userActions'
+import { getUserData } from '../../store/actions/userActions';
+import { setReload } from '../../store/actions/reloadActions';
 
 export class Home extends Component {
   constructor(props) {
     super(props);
     this.navigateTo = this.navigateTo.bind(this);
+    this.update = this.update.bind(this);
     this.state = { loading: true };
+
   }
 
   async componentWillMount() {
@@ -38,9 +41,12 @@ export class Home extends Component {
     this.setState({ loading: false });
   }
 
-  async componentDidMount() {
+  update() {
+    this.props.setReload(false);
     if (this.props.auth) {
+      console.log('i Get ALl Rooms')
       this.props.getRooms();
+      this.props.getUserData(this.props.auth.data.pseudo);
     } else {
       this.navigateTo('/Login');
     }
@@ -55,14 +61,21 @@ export class Home extends Component {
   };
 
   render() {
+    console.log("Home render");
     if (this.state.loading) {
       return <Expo.AppLoading />;
     }
-
+    // this.forceUpdate();
     const { navigate } = this.props.navigation;
-    const { rooms, auth, user } = this.props;
+    // console.log(this.props);
+    const { rooms, auth, user, reload } = this.props;
+    
 
-    // if (!auth) (this.navigateTo('/Login'));
+    if (reload === true) {
+      console.log("in reload render");
+      this.update();
+    };        
+
 
     let userInfo = null;
     if (auth && user) userInfo = user;
@@ -150,6 +163,7 @@ export class Home extends Component {
           <Content style={{ marginTop: 20 }}>
             <View>
               <RoomsList
+                score={userInfo.score}
                 roomsList={rooms}
                 navigate={this.navigateTo}
               />
@@ -165,11 +179,13 @@ const mapStateToProps = state => ({
   rooms: state.rooms.rooms,
   auth: state.auth.userData,
   user: state.user.userInfos,
+  reload: state.reload.reload
   // scores: state.scores.scores
 });
 
 const mapDispatchToProps = dispatch => ({
   getRooms: () => dispatch(getRooms()),
+  setReload: reload => dispatch(setReload(reload)),
   getUserData: pseudo => dispatch(getUserData(pseudo)),
   // getTopScores: () => dispatch(getTopScores())
 });
