@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, ImageBackground, Image } from 'react-native';
-import Modal from 'react-native-modal';
 import PropTypes from 'prop-types';
 import { ImagePicker } from 'expo';
 import {
@@ -12,10 +11,6 @@ import {
   Right,
   Body,
   Text,
-  Form,
-  Item,
-  Label,
-  Input
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { signOut } from '../../store/actions/authenticationActions';
@@ -33,9 +28,6 @@ export class Profile extends Component {
   static navigationOptions = {
     title: 'Boomer'
   };
-
-  // _toggleModal = () =>
-  //   this.setState({ isModalVisible: !this.state.isModalVisible });
 
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -131,16 +123,15 @@ export class Profile extends Component {
                 <MaterialCommunityIcons name="camera" size={30} color="white" />
               </Button>
 
-              <Button primary>
-                <Text>Sign Out</Text>
-              </Button>
-
               <View style={styles.passwordForm}>
                 <Text style={styles.passwordFormTitle}>{auth.data.pseudo}</Text>
               </View>
             </View>
           </Content>
         </ImageBackground>
+        <Button danger style={{ position: "absolute", bottom: 20, width: "90%", marginLeft: "5%", marginRight: "5%" }} onPress={() => this.props.signOut()}>
+          <Text style={{ width: "100%", textAlign: "center" }}>Sign Out</Text>
+        </Button>
       </Container>
     );
   }
@@ -150,11 +141,13 @@ const mapStateToProps = state => ({
   auth: state.auth.userData
 });
 
-// const mapDispatchToProps = dispatch => {
-//   { }
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    signOut: () => dispatch(signOut())
+  }
+};
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Profile);

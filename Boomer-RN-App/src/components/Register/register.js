@@ -44,7 +44,21 @@ const RegisterComponent = props => {
       >
         <Text style={styles.registerButtonText}>Register</Text>
       </Button>
-      {rError !== null ? <Text>Register Error</Text> : null}
+      {rError !== null ? (
+        <Text
+          style={{
+            width: "100%",
+            textAlign: "center",
+            color: "#781424",
+            paddingTop: 20
+          }}
+        >
+
+
+
+          Register Error
+</Text>
+      ) : null}
     </Form>
   );
 };

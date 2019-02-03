@@ -7,8 +7,7 @@ import {
   Footer,
   FooterTab,
   Button,
-  Text,
-  Toast
+  Text
 } from 'native-base';
 import { connect } from 'react-redux';
 import * as AllActions from '../../store/actions/authenticationActions';
@@ -37,7 +36,7 @@ export class Authentication extends Component {
       currentComponent: '/Login'
     };
   }
-  
+
   renderComponent(toRender) {
     if (toRender === '/Login') {
       this.setState(previousState => ({ currentComponent: '/Login' }));
@@ -57,7 +56,6 @@ export class Authentication extends Component {
         password: this.state.passwordLogin
       };
       this.props.signIn(credentials);
-      console.log("Auth Error : ", this.props.authError);
     }
     else {
       const credentials = {

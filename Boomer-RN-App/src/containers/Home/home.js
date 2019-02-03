@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Col, Grid } from 'react-native-easy-grid';
 import {
   Container,
   Header,
@@ -69,12 +69,12 @@ export class Home extends Component {
     const { navigate } = this.props.navigation;
     // console.log(this.props);
     const { rooms, auth, user, reload } = this.props;
-    
+
 
     if (reload === true) {
       console.log("in reload render");
       this.update();
-    };        
+    };
 
 
     let userInfo = null;
@@ -150,14 +150,6 @@ export class Home extends Component {
                 </Right>
               </Col>
             </Grid>
-          </View>
-
-          <View style={styles.buttonPadding}>
-            <Button rounded style={styles.genLinkButton}>
-              <Text style={styles.genLinkButtonText}>
-                Créez votre propre room !
-                </Text>
-            </Button>
           </View>
 
           <Content style={{ marginTop: 20 }}>

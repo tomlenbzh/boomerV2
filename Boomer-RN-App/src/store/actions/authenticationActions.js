@@ -28,11 +28,9 @@ export const signUp = credentials => (dispatch, getState) =>
       }
     })
     .then(response => {
-      // console.log(response);
       dispatch({ type: "SIGN_UP_SUCCESS", response });
     })
     .catch(error => {
-      // console.log(error);
       dispatch({ type: "SIGN_UP_ERROR", error });
       throw error;
     });

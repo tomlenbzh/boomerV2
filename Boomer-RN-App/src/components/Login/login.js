@@ -36,7 +36,19 @@ const LoginComponent = props => {
       >
         <Text style={styles.loginButtonText}>{text}</Text>
       </Button>
-      {aError !== null ? <Text>Auth Error</Text> : null}
+      {aError !== null ? (
+        <Text
+          style={{
+            width: "100%",
+            textAlign: "center",
+            color: "#781424",
+            paddingTop: 20
+          }}
+        >
+
+          Auth Error
+</Text>
+      ) : null}
     </Form>
   );
 };

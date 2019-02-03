@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
-import { Col, Row, Grid } from 'react-native-easy-grid';
 import {
   Container,
   Header,

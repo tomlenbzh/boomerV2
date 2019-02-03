@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import { Col } from "react-native";
 import { List, ListItem, Thumbnail, Text, Col } from "native-base";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
