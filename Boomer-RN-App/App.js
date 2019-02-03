@@ -1,6 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { createAppContainer, createStackNavigator } from "react-navigation";
+import * as firebase from "firebase";
 import store from "./src/store/store";
 
 import Authentication from "./src/containers/Authentication/authentication";
