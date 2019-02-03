@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
   rooms: roomsReducer,
   user: userReducer,
   scores: scoresReducer,
+  imgs: scoresReducer,
   reload: reloadReducer
 });
 

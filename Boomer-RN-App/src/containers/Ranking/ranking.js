@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { View, ImageBackground } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { View, ImageBackground } from "react-native";
+import PropTypes from "prop-types";
 import {
   Container,
   Header,
@@ -10,15 +10,15 @@ import {
   Right,
   Body,
   Text
-} from 'native-base';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { connect } from 'react-redux';
+} from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { connect } from "react-redux";
 
-import RankingComponent from '../../components/Ranking/ranking';
+import RankingComponent from "../../components/Ranking/ranking";
 
-import { getTopScores } from '../../store/actions/scoresActions';
+import { getTopScores } from "../../store/actions/scoresActions";
 
-import styles from './ranking.style';
+import styles from "./ranking.style";
 
 export class Ranking extends Component {
   static propTypes = {
@@ -36,12 +36,12 @@ export class Ranking extends Component {
     return (
       <Container>
         <ImageBackground
-          source={require('../../../assets/boomer-background.jpg')}
+          source={require("../../../assets/boomer-background.jpg")}
           style={styles.backgroundImage}
         >
           <Header style={styles.headerContent}>
             <Left style={styles.headerFlex}>
-              <Button transparent onPress={() => navigate('Home')}>
+              <Button transparent onPress={() => navigate("Home")}>
                 <MaterialCommunityIcons
                   name="home-outline"
                   size={32}
@@ -53,7 +53,7 @@ export class Ranking extends Component {
               <Text style={styles.headerTitleText}>Boomer</Text>
             </Body>
             <Right style={styles.headerFlex}>
-              <Button transparent onPress={() => navigate('Profile')}>
+              <Button transparent onPress={() => navigate("Profile")}>
                 <MaterialCommunityIcons
                   name="account-convert"
                   size={30}
@@ -65,7 +65,7 @@ export class Ranking extends Component {
 
           <Content style={styles.contentStyle}>
             <View>
-              <RankingComponent scoreList={scores} />
+              <RankingComponent scoreList={scores} imgsList={imgs} />
             </View>
           </Content>
         </ImageBackground>
@@ -75,7 +75,8 @@ export class Ranking extends Component {
 }
 
 const mapStateToProps = state => ({
-  scores: state.scores.scores
+  scores: state.scores.scores,
+  imgs: state.scores.imgs
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -36,6 +36,7 @@ export class Room extends Component {
   constructor(props) {
     super(props);
     this._clicked = this._clicked.bind(this);
+    this.destroy = this.destroy.bind(this);
     this.state = {
       click_X: undefined,
       click_Y: undefined,

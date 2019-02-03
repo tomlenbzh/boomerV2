@@ -7,19 +7,21 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./ranking.style";
 
 const RankingComponent = props => {
-  const { scoreList } = props;
-  console.log("score : ", scoreList);
+  const { scoreList, imgsList } = props;
+  console.log(imgsList);
   return (
     <List>
-      {scoreList &&
-        scoreList.data.map(item => (
+      {imgsList &&
+        imgsList.length === 5 &&
+        scoreList &&
+        scoreList.data.map((item, index) => (
           <ListItem avatar noIndent style={styles.rankingItem} key={item.rank}>
             <Col>
               <Text style={styles.rankingPosition}>{item.rank}</Text>
             </Col>
             <Col>
               <Thumbnail
-                source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-cDQBqhVvItA9BEeuZiUOHuZaG661kx2anGilfNGuOYejjKfL"
+                source={imgsList[index]}
                 style={styles.rankingThumbnail}
               />
             </Col>

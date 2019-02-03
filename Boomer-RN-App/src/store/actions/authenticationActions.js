@@ -11,11 +11,9 @@ export const signIn = credentials => async dispatch => {
     })
     .then(response => {
       dispatch({ type: "SIGN_IN_SUCCESS", response });
-      console.log("Dispatch sucess");
     })
     .catch(error => {
       dispatch({ type: "SIGN_IN_ERROR", error });
-      console.log("Dispatch error : ", error);
       throw error;
     });
 };

@@ -1,5 +1,6 @@
 const initState = {
-  scores: null
+  scores: null,
+  imgs: null
 };
 
 const scoresReducer = (state = initState, action) => {
@@ -9,7 +10,11 @@ const scoresReducer = (state = initState, action) => {
         ...state,
         scores: action.response.data
       };
-
+    case "SET_IMGS":
+      return {
+        ...state,
+        imgs: action.imgs
+      };
     case "GET_SCORES_ERROR":
       return {
         ...state,

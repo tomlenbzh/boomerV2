@@ -3,6 +3,7 @@ import { View, TouchableOpacity, ImageBackground, Image } from "react-native";
 import Modal from "react-native-modal";
 import PropTypes from "prop-types";
 import { ImagePicker } from "expo";
+import { setReload } from '../../store/actions/reloadActions';
 import * as firebase from "firebase";
 import {
   Container,
@@ -15,7 +16,6 @@ import {
   Text,
 } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { signOut } from '../../store/actions/authenticationActions';
 
 import styles from "./profile.style";
 
@@ -25,28 +25,14 @@ export class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = { image: null, isModalVisible: false };
-    const firebaseConfig = {
-      apiKey: "AIzaSyAZAVR-roKX-Xkvj-23NNSJ5QkgF2vBwx4",
-      authDomain: "react-native-ecdfc.firebaseapp.com",
-      databaseURL: "https://react-native-ecdfc.firebaseio.com",
-      projectId: "react-native-ecdfc",
-      storageBucket: "react-native-ecdfc.appspot.com",
-      messagingSenderId: "400846912108"
-    };
-    if (!firebase.apps.length) {
-      console.log("init Firebase");
-      firebase.initializeApp(firebaseConfig);
-    }
     firebase
       .storage()
       .ref(this.props.auth.data.pseudo)
       .getDownloadURL()
       .then(url => {
-        console.log(url);
         this.setState({ image: url });
       })
       .catch((error) => {
-        console.log(error)
       });
   }
 
@@ -61,12 +47,10 @@ export class Profile extends Component {
     });
     if (!result.cancelled) {
       this.setState({ image: result.uri });
-      console.log(this.props.auth.data.pseudo);
       const uri = await this.uploadImage(
         result.uri,
         this.props.auth.data.pseudo
       );
-      console.log(uri);
       this.setState({ image: uri });
     }
   };
@@ -87,23 +71,15 @@ export class Profile extends Component {
     const { Permissions } = Expo;
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     const { statusRoll } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    console.log("camera permission status : ", status + " + " + statusRoll);
   };
 
   async uploadImage(uri, imageName) {
-    // console.log("uploadImage");
-    // const response = await fetch(uri);
-    // const blob = await response.blob();
-
-    // var ref = firebase.storage().ref().child(imageName);
-    // return ref.put(blob);
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = function() {
         resolve(xhr.response);
       };
       xhr.onerror = function(e) {
-        console.log(e);
         reject(new TypeError("Network request failed"));
       };
       xhr.responseType = "blob";
@@ -123,6 +99,11 @@ export class Profile extends Component {
     return await snapshot.ref.getDownloadURL();
   }
 
+  leave(path) {
+      this.props.setReload(true);
+      this.props.navigation.navigate(path);
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     const { auth } = this.props;
@@ -136,7 +117,7 @@ export class Profile extends Component {
         >
           <Header style={styles.headerContent}>
             <Left style={styles.headerFlex}>
-              <Button transparent onPress={() => navigate("Home")}>
+              <Button transparent onPress={() => this.leave("Home")}>
                 <MaterialCommunityIcons
                   name="home-outline"
                   size={32}
@@ -148,7 +129,7 @@ export class Profile extends Component {
               <Text style={styles.headerTitleText}>Boomer</Text>
             </Body>
             <Right style={styles.headerFlex}>
-              <Button transparent onPress={() => navigate("Profile")}>
+              <Button transparent onPress={() => this.leave("Profile")}>
                 <MaterialCommunityIcons
                   name="account-convert"
                   size={30}
@@ -194,9 +175,6 @@ export class Profile extends Component {
             </View>
           </Content>
         </ImageBackground>
-        <Button danger style={{ position: "absolute", bottom: 20, width: "90%", marginLeft: "5%", marginRight: "5%" }} onPress={() => this.props.signOut()}>
-          <Text style={{ width: "100%", textAlign: "center" }}>Sign Out</Text>
-        </Button>
       </Container>
     );
   }
@@ -208,7 +186,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    signOut: () => dispatch(signOut())
+    setReload: reload => dispatch(setReload(reload)),
   }
 };
 
