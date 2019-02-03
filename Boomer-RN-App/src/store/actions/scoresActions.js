@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getTopScores = () => (dispatch, getState) =>
+const getTopScores = () => dispatch =>
   axios
     .get("https://alexandremartins.net/top/")
     .then(response => {
@@ -11,6 +11,4 @@ export const getTopScores = () => (dispatch, getState) =>
       throw error;
     });
 
-export const setImgs = imgs => dispatch => {
-  dispatch({ type: "SET_IMGS", imgs });
-};
+export default getTopScores;

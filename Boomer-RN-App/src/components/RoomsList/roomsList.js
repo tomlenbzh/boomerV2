@@ -59,15 +59,34 @@ const RoomsList = props => {
   );
 };
 
+RoomsList.defaultProps = {
+  roomsList: null
+};
+
 RoomsList.propTypes = {
-  navigate: PropTypes.func.isRequired
-  // rooms: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     id: PropTypes.string.isRequired,
-  //     difficulty: PropTypes.string.isRequired,
-  //     imageURL: PropTypes.string.isRequired
-  //   })
-  // ).isRequired
+  navigate: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired,
+  roomsList: PropTypes.objectOf(
+    PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          background: PropTypes.string.isRequired,
+          difficulty: PropTypes.shape({
+            background: PropTypes.string.isRequired,
+            click_nbr: PropTypes.number.isRequired,
+            description: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
+            loss: PropTypes.number.isRequired,
+            multiplier: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired
+          }),
+          hot_potatoe: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
+          start_time: PropTypes.string.isRequired
+        })
+      ).isRequired
+    }).isRequired
+  )
 };
 
 export default RoomsList;

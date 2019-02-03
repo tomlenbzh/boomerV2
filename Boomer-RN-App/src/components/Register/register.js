@@ -22,7 +22,8 @@ const RegisterComponent = props => {
       <Item floatingLabel style={styles.registerInput}>
         <Label style={styles.registerLabel}>Password</Label>
         <Input
-          style={styles.loginInputText}
+          secureTextEntry
+          style={styles.RegisterInputText}
           onChangeText={text => {
             hChange(text, "passwordRegister");
           }}
@@ -31,6 +32,7 @@ const RegisterComponent = props => {
       <Item floatingLabel style={styles.registerInput}>
         <Label style={styles.registerLabel}>Confirm password</Label>
         <Input
+          secureTextEntry
           style={styles.RegisterInputText}
           onChangeText={text => {
             hChange(text, "confirmpasswordRegister");
@@ -53,14 +55,15 @@ const RegisterComponent = props => {
             paddingTop: 20
           }}
         >
-
-
-
           Register Error
-</Text>
+        </Text>
       ) : null}
     </Form>
   );
+};
+
+RegisterComponent.defaultProps = {
+  rError: null
 };
 
 RegisterComponent.propTypes = {

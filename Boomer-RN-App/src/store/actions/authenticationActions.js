@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { API_URL } from "../../environment";
 
 export const signIn = credentials => async dispatch => {
   axios
@@ -18,7 +17,7 @@ export const signIn = credentials => async dispatch => {
     });
 };
 
-export const signUp = credentials => (dispatch, getState) =>
+export const signUp = credentials => dispatch =>
   axios
     .post(`https://alexandremartins.net/auths/signup`, credentials, {
       headers: {
@@ -33,7 +32,7 @@ export const signUp = credentials => (dispatch, getState) =>
       throw error;
     });
 
-export const signOut = () => (dispatch, getState) =>
+export const signOut = () => dispatch =>
   axios
     .get(`https://alexandremartins.net/auths/logout`)
     .then(response => {

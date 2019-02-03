@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { View, TouchableOpacity, ImageBackground, Image } from "react-native";
-import Modal from "react-native-modal";
-import PropTypes from "prop-types";
+import { View, ImageBackground, Image } from "react-native";
 import { ImagePicker } from "expo";
-import { setReload } from '../../store/actions/reloadActions';
 import * as firebase from "firebase";
 import {
   Container,
@@ -13,13 +10,14 @@ import {
   Left,
   Right,
   Body,
-  Text,
-} from 'native-base';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-import styles from "./profile.style";
+  Text
+} from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { connect } from "react-redux";
+import styles from "./profile.style";
+
+import setReload from "../../store/actions/reloadActions";
 
 export class Profile extends Component {
   constructor(props) {
@@ -32,8 +30,7 @@ export class Profile extends Component {
       .then(url => {
         this.setState({ image: url });
       })
-      .catch((error) => {
-      });
+      .catch(() => {});
   }
 
   static navigationOptions = {
@@ -41,7 +38,7 @@ export class Profile extends Component {
   };
 
   _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3]
     });
@@ -57,7 +54,7 @@ export class Profile extends Component {
 
   _takePhoto = () => {
     this._getCameraPermission().then(async () => {
-      let result = await ImagePicker.launchCameraAsync({
+      const result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
         aspect: [4, 3]
       });
@@ -100,14 +97,14 @@ export class Profile extends Component {
   }
 
   leave(path) {
-      this.props.setReload(true);
-      this.props.navigation.navigate(path);
+    this.props.setReload(true);
+    this.props.navigation.navigate(path);
   }
 
   render() {
     const { navigate } = this.props.navigation;
     const { auth } = this.props;
-    let { image } = this.state;
+    const { image } = this.state;
 
     return (
       <Container>
@@ -143,9 +140,9 @@ export class Profile extends Component {
             <View style={styles.profileContainer}>
               <Image
                 source={{
-                  uri: image
-                    ? image
-                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBy99Qq2D8P2rmXcJi-SzGvHN6M9xT0t3ss0v5k7by10ZukhTo"
+                  uri:
+                    image ||
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBy99Qq2D8P2rmXcJi-SzGvHN6M9xT0t3ss0v5k7by10ZukhTo"
                 }}
                 style={styles.profilePictureStyle}
               />
@@ -184,11 +181,9 @@ const mapStateToProps = state => ({
   auth: state.auth.userData
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setReload: reload => dispatch(setReload(reload)),
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  setReload: reload => dispatch(setReload(reload))
+});
 
 export default connect(
   mapStateToProps,

@@ -10,5 +10,5 @@
     "prettier/prettier": "error",
     "linebreak-style": ["error", "windows"]
   },
-  "extends": ["airbnb", "prettier"]
+  "extends": ["airbnb", "prettier", "prettier/react"]
 }

@@ -9,10 +9,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^9.0.0",
     "axios": "^0.18.0",
     "expo": "^31.0.2",
     "firebase": "^5.8.2",
     "native-base": "^2.8.1",
+    "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-modal": "^7.0.2",
@@ -26,6 +28,7 @@
     "@babel/preset-flow": "^7.0.0",
     "acorn": "^6.0.4",
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
     "babel-preset-expo": "^5.0.0",
     "babel-preset-react-native": "^4.0.1",
     "eslint": "^5.9.0",

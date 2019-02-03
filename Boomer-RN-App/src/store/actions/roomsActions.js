@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getRooms = () => async (dispatch, getState) =>
+const getRooms = () => async dispatch =>
   axios
     .get(`https://alexandremartins.net/rooms`)
     .then(response => {
@@ -10,3 +10,5 @@ export const getRooms = () => async (dispatch, getState) =>
       dispatch({ type: "GET_ROOMS_ERROR" });
       throw error;
     });
+
+export default getRooms;

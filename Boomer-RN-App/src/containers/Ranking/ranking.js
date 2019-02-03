@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { View, ImageBackground } from "react-native";
-import PropTypes from "prop-types";
 import {
   Container,
   Header,
@@ -13,17 +12,12 @@ import {
 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { connect } from "react-redux";
-
 import RankingComponent from "../../components/Ranking/ranking";
-
-import { getTopScores } from "../../store/actions/scoresActions";
-
+import getTopScores from "../../store/actions/scoresActions";
 import styles from "./ranking.style";
 
 export class Ranking extends Component {
-  static propTypes = {
-    // prop: PropTypes
-  };
+  static propTypes = {};
 
   async componentDidMount() {
     this.props.getTopScores();
@@ -65,7 +59,7 @@ export class Ranking extends Component {
 
           <Content style={styles.contentStyle}>
             <View>
-              <RankingComponent scoreList={scores} imgsList={imgs} />
+              <RankingComponent scoreList={scores} />
             </View>
           </Content>
         </ImageBackground>
@@ -75,8 +69,7 @@ export class Ranking extends Component {
 }
 
 const mapStateToProps = state => ({
-  scores: state.scores.scores,
-  imgs: state.scores.imgs
+  scores: state.scores.scores
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -23,7 +23,6 @@ const roomsReducer = (state = initState, action) => {
         ...state
       };
   }
-  return state;
 };
 
 export default roomsReducer;

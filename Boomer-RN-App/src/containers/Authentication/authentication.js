@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { View, ImageBackground } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { View, ImageBackground } from "react-native";
 import {
   Container,
   Content,
@@ -8,17 +7,13 @@ import {
   FooterTab,
   Button,
   Text
-} from 'native-base';
-import { connect } from 'react-redux';
-import * as AllActions from '../../store/actions/authenticationActions';
+} from "native-base";
+import { connect } from "react-redux";
+import * as AllActions from "../../store/actions/authenticationActions";
 
-import LoginComponent from '../../components/Login/login';
-import RegisterComponent from '../../components/Register/register';
-
-import styles from './authentication.style';
-import { bindActionCreators } from 'redux';
-
-// Authentication.PropTypes = { }
+import LoginComponent from "../../components/Login/login";
+import RegisterComponent from "../../components/Register/register";
+import styles from "./authentication.style";
 
 export class Authentication extends Component {
   constructor(props) {
@@ -28,36 +23,35 @@ export class Authentication extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       loading: true,
-      pseudoLogin: '',
-      passwordLogin: '',
-      pseudoRegister: '',
-      passwordRegister: '',
-      confirmpasswordRegister: '',
-      currentComponent: '/Login'
+      pseudoLogin: "",
+      passwordLogin: "",
+      pseudoRegister: "",
+      passwordRegister: "",
+      confirmpasswordRegister: "",
+      currentComponent: "/Login"
     };
   }
 
   renderComponent(toRender) {
-    if (toRender === '/Login') {
-      this.setState(previousState => ({ currentComponent: '/Login' }));
+    if (toRender === "/Login") {
+      this.setState(() => ({ currentComponent: "/Login" }));
     } else {
-      this.setState(previousState => ({ currentComponent: '/Register' }));
+      this.setState(() => ({ currentComponent: "/Register" }));
     }
   }
 
   handleChange = (e, field) => {
-    this.setState(previousState => ({ [field]: e }));
+    this.setState(() => ({ [field]: e }));
   };
 
   handleSubmit = (e, action) => {
-    if (action === 'login') {
+    if (action === "login") {
       const credentials = {
         pseudo: this.state.pseudoLogin,
         password: this.state.passwordLogin
       };
       this.props.signIn(credentials);
-    }
-    else {
+    } else {
       const credentials = {
         pseudo: this.state.pseudoRegister,
         password: this.state.passwordRegister,
@@ -73,33 +67,38 @@ export class Authentication extends Component {
 
   async componentWillMount() {
     await Expo.Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf')
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
     this.setState({ loading: false });
     console.disableYellowBox = true;
   }
 
   render() {
-
     const { auth, hasRegistered, authError, registerError } = this.props;
-    if (hasRegistered && !auth) { this.state.currentComponent = '/Login'; }
-    if (auth) { this.navigateTo('Home'); }
-    if (this.state.loading) { return <Expo.AppLoading />; }
+    if (hasRegistered && !auth) {
+      this.state.currentComponent = "/Login";
+    }
+    if (auth) {
+      this.navigateTo("Home");
+    }
+    if (this.state.loading) {
+      return <Expo.AppLoading />;
+    }
 
     return (
       <Container>
         <Content>
           <ImageBackground
-            source={require('../../../assets/boomer-background.jpg')}
+            source={require("../../../assets/boomer-background.jpg")}
             style={styles.backgroundImage}
           >
             <View style={styles.loginContainer}>
               <View style={styles.headerTitle}>
                 <Text style={styles.headerTitleText}>Boomer</Text>
               </View>
-              {this.state.currentComponent === '/Login' ? (
+              {this.state.currentComponent === "/Login" ? (
                 <LoginComponent
                   hSubmit={this.handleSubmit}
                   hChange={this.handleChange}
@@ -107,13 +106,13 @@ export class Authentication extends Component {
                   text="Login"
                 />
               ) : (
-                  <RegisterComponent
-                    hSubmit={this.handleSubmit}
-                    hChange={this.handleChange}
-                    rError={registerError ? <p>{registerError}</p> : null}
-                    text="Register"
-                  />
-                )}
+                <RegisterComponent
+                  hSubmit={this.handleSubmit}
+                  hChange={this.handleChange}
+                  rError={registerError ? <p>{registerError}</p> : null}
+                  text="Register"
+                />
+              )}
             </View>
           </ImageBackground>
         </Content>
@@ -121,14 +120,14 @@ export class Authentication extends Component {
           <FooterTab style={styles.footer}>
             <Button
               onPress={() => {
-                this.renderComponent('/Login');
+                this.renderComponent("/Login");
               }}
             >
               <Text style={styles.footer}>Login</Text>
             </Button>
             <Button
               onPress={() => {
-                this.renderComponent('/Register');
+                this.renderComponent("/Register");
               }}
             >
               <Text style={styles.footer}>Register</Text>
@@ -140,21 +139,17 @@ export class Authentication extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    authError: state.auth.authError,
-    registerError: state.auth.registerError,
-    hasRegistered: state.auth.hasRegistered,
-    auth: state.auth.userData
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  authError: state.auth.authError,
+  registerError: state.auth.registerError,
+  hasRegistered: state.auth.hasRegistered,
+  auth: state.auth.userData
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signIn: credentials => dispatch(AllActions.signIn(credentials)),
-    signUp: credentials => dispatch(AllActions.signUp(credentials))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  signIn: credentials => dispatch(AllActions.signIn(credentials)),
+  signUp: credentials => dispatch(AllActions.signUp(credentials))
+});
 
 export default connect(
   mapStateToProps,

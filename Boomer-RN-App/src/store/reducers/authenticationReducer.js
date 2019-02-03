@@ -56,7 +56,6 @@ const authenticationReducer = (state = initState, action) => {
         ...state
       };
   }
-  return state;
 };
 
 export default authenticationReducer;

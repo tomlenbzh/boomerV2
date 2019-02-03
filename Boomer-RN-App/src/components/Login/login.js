@@ -1,7 +1,6 @@
 import React from "react";
 import { Item, Label, Input, Button, Form, Text } from "native-base";
 import PropTypes from "prop-types";
-
 import styles from "./login.style";
 
 const LoginComponent = props => {
@@ -14,18 +13,19 @@ const LoginComponent = props => {
         <Input
           style={styles.loginInputText}
           id="pseudoLogin"
-          onChangeText={text => {
-            hChange(text, "pseudoLogin");
+          onChangeText={textPseudo => {
+            hChange(textPseudo, "pseudoLogin");
           }}
         />
       </Item>
       <Item floatingLabel style={styles.loginInput}>
         <Label style={styles.loginLabel}>Password</Label>
         <Input
+          secureTextEntry
           style={styles.loginInputText}
           id="passwordLogin"
-          onChangeText={text => {
-            hChange(text, "passwordLogin");
+          onChangeText={textPass => {
+            hChange(textPass, "passwordLogin");
           }}
         />
       </Item>
@@ -45,17 +45,22 @@ const LoginComponent = props => {
             paddingTop: 20
           }}
         >
-
           Auth Error
-</Text>
+        </Text>
       ) : null}
     </Form>
   );
 };
 
+LoginComponent.defaultProps = {
+  aError: null
+};
+
 LoginComponent.propTypes = {
   hSubmit: PropTypes.func.isRequired,
-  hChange: PropTypes.func.isRequired
+  hChange: PropTypes.func.isRequired,
+  aError: PropTypes.string,
+  text: PropTypes.string.isRequired
 };
 
 export default LoginComponent;

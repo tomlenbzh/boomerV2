@@ -20,7 +20,6 @@ const scoresReducer = (state = initState, action) => {
         ...state
       };
   }
-  return state;
 };
 
 export default scoresReducer;

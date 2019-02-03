@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, ImageBackground } from "react-native";
-import PropTypes from "prop-types";
 import { Col, Grid } from "react-native-easy-grid";
 import {
   Container,
@@ -11,19 +10,15 @@ import {
   Left,
   Right,
   Body,
-  Text,
-  Image
+  Text
 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as firebase from "firebase";
-
 import RoomsList from "../../components/RoomsList/roomsList";
-
 import styles from "./home.style";
-
-import { getRooms } from "../../store/actions/roomsActions";
-import { getUserData } from "../../store/actions/userActions";
-import { setReload } from "../../store/actions/reloadActions";
+import getRooms from "../../store/actions/roomsActions";
+import getUserData from "../../store/actions/userActions";
+import setReload from "../../store/actions/reloadActions";
 
 export class Home extends Component {
   constructor(props) {
@@ -177,14 +172,12 @@ const mapStateToProps = state => ({
   auth: state.auth.userData,
   user: state.user.userInfos,
   reload: state.reload.reload
-  // scores: state.scores.scores
 });
 
 const mapDispatchToProps = dispatch => ({
   getRooms: () => dispatch(getRooms()),
   setReload: reload => dispatch(setReload(reload)),
   getUserData: pseudo => dispatch(getUserData(pseudo))
-  // getTopScores: () => dispatch(getTopScores())
 });
 
 export default connect(
